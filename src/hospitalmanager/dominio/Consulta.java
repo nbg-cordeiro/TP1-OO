@@ -7,54 +7,57 @@ public class Consulta {
     private String status = "Agendada";
     private LocalDateTime dataHora;
     private String local;
+    private String motivo;
 
-    public Consulta(Paciente paciente, Medico medico, String local, LocalDateTime dataHora)
+    public Consulta(Paciente paciente, Medico medico, String local, LocalDateTime dataHora, String motivo)
     {
         this.paciente = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
         this.local = local;
+        this.motivo = motivo;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
     }
 
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-    public void setLocal(String local) {
-        this.local = local;
-    }
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-    public void setMedico(Medico medico){
-        this.medico = medico;
-    }
-
+    public void setMotivo(String motivo)
+        {this.motivo = motivo;}
+    public void setDataHora(LocalDateTime dataHora)
+        {this.dataHora = dataHora;}
+    public void setLocal(String local)
+        {this.local = local;}
+    public void setPaciente(Paciente paciente)
+        {this.paciente = paciente;}
+    public void setMedico(Medico medico)
+        {this.medico = medico;}
     public void concluirConsulta()
-    {
-        status = "Concluída";
-    }
+        {status = "Concluída";}
     public void cancelarConsulta()
+        {
+            medico.removerConsulta(this);
+            paciente.removerConsulta(this);
+            this.status = "Cancelada";
+        }
+
+    public String getMotivo()
+        {return motivo;}
+    public Paciente getPaciente()
+        {return paciente;}
+    public Medico getMedico()
+        {return medico;}
+    public String getStatus()
+        {return status;}
+    public String getLocal()
+        {return local;}
+    public LocalDateTime getDataHora()
+        {return dataHora;}
+    public String toString()
     {
-        status = "Cancelado";
+        return "vou colocar o formato depois :P";
     }
-
-    public Paciente getPaciente() {
-        return paciente;
+    public String toStringSemPaciente()
+    {
+        return "vou colocar o formato depois :P";
+        //LEIA O NOME DO METODO
     }
-    public Medico getMedico() {
-        return medico;
-    }
-    public String getStatus() {
-        return status;
-    }
-    public String getLocal() {
-        return local;
-    }
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-
 }

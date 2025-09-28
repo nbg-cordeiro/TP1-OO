@@ -6,6 +6,7 @@ import java.util.List;
 public class Paciente extends Pessoa{
 
     List<Consulta> consultas =  new ArrayList<>();
+
     public Paciente(String cpf, String nome, int idade,List<Consulta> consultas)
     {
         super(cpf ,nome ,idade);
@@ -15,11 +16,28 @@ public class Paciente extends Pessoa{
     {
         super(cpf ,nome ,idade);
     }
+
     public void adicionarConsulta(Consulta consulta)
     {
         this.consultas.add(consulta);
     }
-    public List<Consulta> getConsultas() {
-        return consultas;
+    public void removerConsulta(Consulta consulta)
+    {
+        this.consultas.remove(consulta);
+    }
+
+    public List<Consulta> getConsultas()
+        {return consultas;}
+
+    public void listarConsultas()
+    {
+        for(Consulta consulta : consultas)
+        {
+            // já já eu coloco isso
+        }
+    }
+    public String toString()
+    {
+        return "vou colocar o formato depois :P";
     }
 }
