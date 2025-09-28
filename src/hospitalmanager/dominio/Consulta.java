@@ -1,10 +1,11 @@
 package hospitalmanager.dominio;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Consulta {
     private Paciente paciente;
     private Medico medico;
-    private String status = "Agendada";
+    private String status = "Marcada";
     private LocalDateTime dataHora;
     private String local;
     private String motivo;
@@ -51,13 +52,9 @@ public class Consulta {
         {return local;}
     public LocalDateTime getDataHora()
         {return dataHora;}
-    public String toString()
-    {
-        return "vou colocar o formato depois :P";
-    }
-    public String toStringSemPaciente()
-    {
-        return "vou colocar o formato depois :P";
-        //LEIA O NOME DO METODO
+    public String toString() {
+        DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm");
+        return"Consulta dia "+ getDataHora().format(data)+" às "+getDataHora().format(hora)+".\n============= Medico =============\n"+getMedico().toString()+"============= Paciente =============\n"+getPaciente().toString()+"\n==================================\n";
     }
 }

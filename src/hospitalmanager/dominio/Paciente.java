@@ -1,16 +1,15 @@
 package hospitalmanager.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Paciente extends Pessoa{
 
-    List<Consulta> consultas =  new ArrayList<>();
+    List<Consulta> historicoConsultas =  new ArrayList<>();
 
     public Paciente(String cpf, String nome, int idade,List<Consulta> consultas)
     {
         super(cpf ,nome ,idade);
-        this.consultas = consultas;
+        this.historicoConsultas = consultas;
     }
     public Paciente(String cpf, String nome, int idade)
     {
@@ -19,25 +18,26 @@ public class Paciente extends Pessoa{
 
     public void adicionarConsulta(Consulta consulta)
     {
-        this.consultas.add(consulta);
+        this.historicoConsultas.add(consulta);
     }
     public void removerConsulta(Consulta consulta)
     {
-        this.consultas.remove(consulta);
+        this.historicoConsultas.remove(consulta);
     }
 
     public List<Consulta> getConsultas()
-        {return consultas;}
+        {return historicoConsultas;}
 
     public void listarConsultas()
     {
-        for(Consulta consulta : consultas)
+        for(Consulta consulta : historicoConsultas)
         {
-            // já já eu coloco isso
+            System.out.println(consulta.toString());
         }
     }
+
     public String toString()
     {
-        return "vou colocar o formato depois :P";
+        return "-Nome: "+getNome()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();
     }
 }

@@ -1,12 +1,11 @@
 package hospitalmanager.dominio;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Medico extends Pessoa {
 
-    String crm;
-    List<Consulta> consultas =  new ArrayList<>();
+    private String crm;
+    List<Consulta> agenda =  new ArrayList<>();
 
     public Medico(String crm, String cpf, String nome, int idade)
     {
@@ -17,23 +16,31 @@ public class Medico extends Pessoa {
     {
         super(cpf,nome,idade);
         this.crm = crm;
-        this.consultas = consultas;
+        this.agenda = consultas;
     }
 
     public void setCrm(String crm)
         {this.crm = crm;}
     public void adicionarConsulta(Consulta consulta)
-        {this.consultas.add(consulta);}
+        {this.agenda.add(consulta);}
     public void removerConsulta(Consulta consulta)
-        {this.consultas.remove(consulta);}
+        {this.agenda.remove(consulta);}
 
     public List<Consulta> getConsultas()
-        {return consultas;}
+        {return agenda;}
     public String getCrm()
         {return crm;}
 
+    public void listarConsultas()
+    {
+        for(Consulta consulta : agenda)
+        {
+            System.out.println(consulta.toString());
+        }
+    }
     public String toString()
     {
-        return "vou colocar o formato depois :P";
+        return "-Nome: "+getNome()+"\n-CRM: "+getCrm()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();
     }
+
 }

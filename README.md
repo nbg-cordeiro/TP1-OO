@@ -26,10 +26,14 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
 
 3. **Estrutura de Pastas:**  
-   [Descrever aqui as principais pastas do projeto]
+   -hospitalmanager (pasta principal do projeto)
+      --app (pasta da aplicação, contém a main executável)
+      --dominio (principais entidades da aplicação)
+      --persistencia (entidades responsáveis pela persistencia de dados)
+      --dados (onde os dados são armazenados e lidos)
 
 3. **Versão do JAVA utilizada:**  
-   [Descrever aqui como versão do JAVA utilizada no projeto. Sugestão: `java 21`]
+   `Java 24`
 
 ---
 
