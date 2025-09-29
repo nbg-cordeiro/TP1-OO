@@ -35,15 +35,15 @@ public class Sistema {
     }
     public void addMedico(Medico medico)
     {
-        this.medicos.add(medico);
+        medicos.add(medico);
     }
     public void addConsulta(Consulta consulta)
     {
-        this.consultas.add(consulta);
+        consultas.add(consulta);
     }
     public void addPaciente(Paciente paciente)
     {
-        this.pacientes.add(paciente);
+        pacientes.add(paciente);
     }
 
     public void listarConsultas()

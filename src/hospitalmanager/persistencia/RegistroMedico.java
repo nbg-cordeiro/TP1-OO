@@ -8,7 +8,7 @@ public class RegistroMedico{
     public static void escrever(List<Medico> medicos)
     {
         try (ObjectOutputStream oos = new ObjectOutputStream(
-                new FileOutputStream("src/hospitalmanager/dados/Medicos.dat")))
+            new FileOutputStream("src/hospitalmanager/dados/Medicos.dat")))
         {
             oos.writeObject(medicos);
         } catch (IOException e) {
