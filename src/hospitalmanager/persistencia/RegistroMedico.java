@@ -23,7 +23,7 @@ public class RegistroMedico{
                 new FileInputStream("src/hospitalmanager/dados/Medicos.dat"))){
             return (List<Medico>) ois.readObject();
         } catch (IOException | ClassNotFoundException e){
-            System.out.println("Erro ao ler os medicos: " + e.getMessage());
+            System.out.println("Sem registros cadastrados, inicializando Medicos vazios");
             return new ArrayList<>();
         }
     }

@@ -22,8 +22,8 @@ public class RegistroConsulta{
         try (ObjectInputStream ois = new ObjectInputStream(
             new FileInputStream("src/hospitalmanager/dados/Consultas.dat"))){
             return (List<Consulta>) ois.readObject();
-        } catch (IOException | ClassNotFoundException e){
-            System.out.println("Erro ao ler as consultas: " + e.getMessage());
+        } catch (ClassNotFoundException | IOException e){
+            System.out.println("Sem registros cadastrados, inicializando Consultas vazias");
             return new ArrayList<>();
         }
     }

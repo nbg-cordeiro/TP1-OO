@@ -20,9 +20,15 @@ public class Sistema {
 
     public static void salvarTudo()
     {
-        RegistroMedico.escrever(medicos);
-        RegistroPaciente.escrever(pacientes);
-        RegistroConsulta.escrever(consultas);
+        try{
+            RegistroMedico.escrever(medicos);
+            RegistroPaciente.escrever(pacientes);
+            RegistroConsulta.escrever(consultas);
+            System.out.println("Dados salvos com sucesso!");
+        }catch(Exception e){
+            System.out.println("Erro no salvamento"+e.getMessage());
+        }
+
     }
     public List<Consulta> getConsultas() {
         return consultas;
