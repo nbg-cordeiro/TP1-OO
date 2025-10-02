@@ -1,120 +1,97 @@
 package hospitalmanager.interfaces;
 
-import hospitalmanager.dominio.Sistema;
+import hospitalmanager.interfaces.elementos.BotaoFechar;
+import hospitalmanager.interfaces.elementos.PainelTitulo;
+import hospitalmanager.interfaces.elementos.Painelnferior;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
-import static hospitalmanager.app.App.executarOpcao;
-
 
 public class MenuInicial extends JFrame{
 
     public MenuInicial(){
-        super("Hospital Manager");
         setSize(500,500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
+        getContentPane().setBackground(Color.gray);
 
-        JPanel painelTitulo = getPainelTitulo();
-        add(painelTitulo, BorderLayout.NORTH);
+        PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Inicial");
+
         JButton botaoPacientes = new JButton("Pacientes");
+        botaoPacientes.setBackground(Color.lightGray);
         botaoPacientes.setPreferredSize(new Dimension(200,100));
         botaoPacientes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent a) {
-                executarOpcao(1);
+                MenuPacientes mPacie = new MenuPacientes(MenuInicial.this);
                 setVisible(false);
             }
         });
         JButton botaoConsultas = new JButton("Consultas");
+        botaoConsultas.setBackground(Color.lightGray);
         botaoConsultas.setPreferredSize(new Dimension(200,100));
         botaoConsultas.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent b) {
-                executarOpcao(2);
+                MenuConsultas mCons = new MenuConsultas(MenuInicial.this);
                 setVisible(false);
             }
         });
         JButton botaoInternacoes = new JButton("Internações");
+        botaoInternacoes.setBackground(Color.lightGray);
         botaoInternacoes.setPreferredSize(new Dimension(200,100));
         botaoInternacoes.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent c) {
-                executarOpcao(3);
+                MenuInternacoes mInters = new MenuInternacoes(MenuInicial.this);
                 setVisible(false);
             }
         });
         JButton botaoMedicos = new JButton("Medicos");
+        botaoMedicos.setBackground(Color.lightGray);
         botaoMedicos.setPreferredSize(new Dimension(200,100));
         botaoMedicos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent d) {
-                executarOpcao(4);
+                MenuMedicos mMedics = new MenuMedicos(MenuInicial.this);
                 setVisible(false);
             }
         });
         JButton botaoPlanos = new JButton("Planos de Saúde");
+        botaoPlanos.setBackground(Color.lightGray);
         botaoPlanos.setPreferredSize(new Dimension(200,100));
         botaoPlanos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                executarOpcao(5);
+                MenuPlanos mPlanos = new MenuPlanos(MenuInicial.this);
                 setVisible(false);
             }
         });
         JButton botaoGeral = new JButton("Geral");
+        botaoGeral.setBackground(Color.lightGray);
         botaoGeral.setPreferredSize(new Dimension(200,100));
         botaoGeral.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent f) {
-                executarOpcao(6);
+                MenuGeral mGeral = new MenuGeral(MenuInicial.this);
                 setVisible(false);
             }
         });
-        JPanel painelBotoes = new JPanel(new GridLayout(3, 2, 20, 20));
-        painelBotoes.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+        JPanel painelBotoes = new JPanel();
+        painelBotoes.setBackground(Color.gray);
+        painelBotoes.setLayout(new GridLayout(3, 2, 10,10));
+        painelBotoes.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         add(painelBotoes, BorderLayout.CENTER);
-        painelBotoes.add(botaoPacientes);
+        painelBotoes.add(botaoGeral);
+        painelBotoes.add(botaoPlanos);
         painelBotoes.add(botaoConsultas);
         painelBotoes.add(botaoInternacoes);
+        painelBotoes.add(botaoPacientes);
         painelBotoes.add(botaoMedicos);
-        painelBotoes.add(botaoPlanos);
-        painelBotoes.add(botaoGeral);
 
-        JButton botaoFechar = new JButton("Salvar e Sair");
-        botaoFechar.setPreferredSize(new Dimension(120,40));
-        JPanel painelBotaoSair = new JPanel();
-        painelBotaoSair.add(botaoFechar);
-        add(painelBotaoSair, BorderLayout.SOUTH);
-        painelBotaoSair.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        botaoFechar.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e){
-                Sistema.salvarTudo();
-                System.out.println("Finalizando...");
-                System.exit(1);
-            }
-        });
-        addWindowListener(new WindowAdapter(){
-            @Override
-            public void windowClosed(WindowEvent e){
-                Sistema.salvarTudo();
-                System.out.println("Finalizando...");
-                System.exit(1);
-            }
-        });
+
+        BotaoFechar botaoFechar = new BotaoFechar(this);
+        JPanel painelInferior = new Painelnferior(this,botaoFechar);
         setVisible(true);
-    }
-    private static JPanel getPainelTitulo() {
-        JPanel painelTitulo = new JPanel(new BorderLayout());
-        painelTitulo.setBackground(new Color(240, 240, 240));
-        JLabel labelTitulo = new JLabel("  Hospital Manager");
-        labelTitulo.setFont(new Font("Arial", Font.BOLD, 14));
-        painelTitulo.add(labelTitulo, BorderLayout.WEST);
-
-        Border bordaInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY);
-        Border margemInterna = BorderFactory.createEmptyBorder(5, 5, 5, 5);
-        painelTitulo.setBorder(BorderFactory.createCompoundBorder(bordaInferior, margemInterna));
-        return painelTitulo;
     }
 }
