@@ -1,9 +1,11 @@
 package hospitalmanager.dominio;
 
+import java.io.Serial;
 import java.util.*;
 
-public class Paciente extends Pessoa{
-
+public class Paciente extends Pessoa implements java.io.Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
     List<Consulta> historicoConsultas =  new ArrayList<>();
 
     public Paciente(String cpf, String nome, int idade,List<Consulta> consultas)

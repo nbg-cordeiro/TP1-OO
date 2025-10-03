@@ -1,9 +1,11 @@
 package hospitalmanager.dominio;
 
+import java.io.Serial;
 import java.util.*;
 
-public class Medico extends Pessoa {
-
+public class Medico extends Pessoa implements java.io.Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String crm;
     List<Consulta> agenda =  new ArrayList<>();
 

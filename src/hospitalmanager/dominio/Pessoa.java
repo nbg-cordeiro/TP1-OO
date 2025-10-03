@@ -1,6 +1,10 @@
 package hospitalmanager.dominio;
 
-public class Pessoa {
+import java.io.Serial;
+
+public class Pessoa implements java.io.Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
     private String cpf;
     private String nome;
     private int idade;

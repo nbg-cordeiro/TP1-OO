@@ -1,8 +1,11 @@
 package hospitalmanager.dominio;
+import java.io.Serial;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Consulta {
+public class Consulta implements java.io.Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
     private Paciente paciente;
     private Medico medico;
     private String status = "Marcada";

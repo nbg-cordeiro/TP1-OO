@@ -2,7 +2,10 @@ package hospitalmanager.persistencia;
 
 import hospitalmanager.dominio.Medico;
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
+
+import static java.nio.file.Files.deleteIfExists;
 
 public class RegistroMedico{
     public static void escrever(List<Medico> medicos)
@@ -27,5 +30,8 @@ public class RegistroMedico{
             System.out.println("Sem registros cadastrados, inicializando Medicos vazios");
             return new ArrayList<>();
         }
+    }
+    public static void deletarRegistro() throws IOException {
+        deleteIfExists(Path.of("src/hospitalmanager/dados/Medicos.dat"));
     }
 }

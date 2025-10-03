@@ -2,7 +2,10 @@ package hospitalmanager.persistencia;
 
 import hospitalmanager.dominio.Consulta;
 import java.io.*;
+import java.nio.file.Path;
 import java.util.*;
+
+import static java.nio.file.Files.deleteIfExists;
 
 public class RegistroConsulta{
     public static void escrever(List<Consulta> consultas)
@@ -27,5 +30,8 @@ public class RegistroConsulta{
             System.out.println("Sem registros cadastrados, inicializando Consultas vazias");
             return new ArrayList<>();
         }
+    }
+    public static void deletarRegistro() throws IOException {
+        deleteIfExists(Path.of("src/hospitalmanager/dados/Consultas.dat"));
     }
 }

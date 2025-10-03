@@ -1,18 +1,19 @@
 package hospitalmanager.interfaces;
 
+import hospitalmanager.dominio.Sistema;
 import hospitalmanager.interfaces.elementos.BotaoFechar;
 import hospitalmanager.interfaces.elementos.PainelTitulo;
 import hospitalmanager.interfaces.elementos.Painelnferior;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
 
 public class MenuInicial extends JFrame{
-
-    public MenuInicial(){
+    private Sistema sistema = new Sistema();
+    public MenuInicial(Sistema sistema){
+        this.sistema = sistema;
         setSize(500,500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -80,18 +81,20 @@ public class MenuInicial extends JFrame{
         painelBotoes.setBackground(Color.gray);
         painelBotoes.setLayout(new GridLayout(3, 2, 10,10));
         painelBotoes.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        add(painelBotoes, BorderLayout.CENTER);
         painelBotoes.add(botaoGeral);
         painelBotoes.add(botaoPlanos);
         painelBotoes.add(botaoConsultas);
         painelBotoes.add(botaoInternacoes);
         painelBotoes.add(botaoPacientes);
         painelBotoes.add(botaoMedicos);
-
-
+        add(painelBotoes, BorderLayout.CENTER);
 
         BotaoFechar botaoFechar = new BotaoFechar(this);
         JPanel painelInferior = new Painelnferior(this,botaoFechar);
         setVisible(true);
+    }
+    public Sistema getSistema()
+    {
+        return sistema;
     }
 }
