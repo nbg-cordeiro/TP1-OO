@@ -4,7 +4,7 @@ import hospitalmanager.interfaces.ModelosTabela.TabelaMedicos;
 import hospitalmanager.interfaces.elementos.BotaoFechar;
 import hospitalmanager.interfaces.elementos.BotaoVoltar;
 import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.Painelnferior;
+import hospitalmanager.interfaces.elementos.PainelInferior;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +19,10 @@ public class MenuMedicos extends JFrame {
         getContentPane().setBackground(Color.gray);
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,passada);
-        Painelnferior painelnferior = new Painelnferior(this,botaoFechar,botaoVoltar);
+        PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar);
+        painelInferior.setBackground(Color.gray);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Medicos");
-
+        titulo.setVisible(true);
         TabelaMedicos modeloMedico = new TabelaMedicos(passada.getSistema().getMedicos());
         JTable tabela = new JTable(modeloMedico);
         JScrollPane scrollPane = new JScrollPane(tabela);

@@ -3,7 +3,7 @@ package hospitalmanager.interfaces;
 import hospitalmanager.interfaces.elementos.BotaoFechar;
 import hospitalmanager.interfaces.elementos.BotaoVoltar;
 import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.Painelnferior;
+import hospitalmanager.interfaces.elementos.PainelInferior;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +18,10 @@ public class MenuGeral extends JFrame {
 
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,passada);
-        Painelnferior painelnferior = new Painelnferior(this,botaoFechar,botaoVoltar);
+        PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar);
+        painelInferior.setVisible(true);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Geral");
+        titulo.setVisible(true);
 
         setVisible(true);
     }
