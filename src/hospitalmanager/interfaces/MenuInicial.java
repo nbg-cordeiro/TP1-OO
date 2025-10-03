@@ -14,7 +14,7 @@ public class MenuInicial extends JFrame{
     private Sistema sistema = new Sistema();
     public MenuInicial(Sistema sistema){
         this.sistema = sistema;
-        setSize(500,500);
+        setSize(800,450);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setLocationRelativeTo(null);

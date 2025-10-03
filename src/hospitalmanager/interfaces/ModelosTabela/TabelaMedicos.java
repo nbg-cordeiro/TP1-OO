@@ -1,22 +1,21 @@
 package hospitalmanager.interfaces.ModelosTabela;
 
-import hospitalmanager.dominio.Paciente;
+import hospitalmanager.dominio.Medico;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 
-public class TabelaPacientes extends AbstractTableModel {
+public class TabelaMedicos extends AbstractTableModel {
+    private final List<Medico> medicos;
+    private final String[] colunas = {"CRM", "CPF","Nome", "Idade"};
 
-    private final List<Paciente> pacientes;
-    private final String[] colunas = {"Nome", "CPF", "Idade"};
-
-    public TabelaPacientes(List<Paciente> pacientes) {
-        this.pacientes = pacientes;
+    public TabelaMedicos(List<Medico> medicos) {
+        this.medicos = medicos;
     }
 
     @Override
     public int getRowCount() {
-        return pacientes.size();
+        return medicos.size();
     }
 
     @Override
@@ -31,11 +30,12 @@ public class TabelaPacientes extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Paciente paciente = pacientes.get(rowIndex);
+        Medico medico = medicos.get(rowIndex);
         return switch (columnIndex){
-            case 0 -> paciente.getNome();
-            case 1 -> paciente.getCpf();
-            case 2 -> paciente.getIdade();
+            case 0 -> medico.getCrm();
+            case 1 -> medico.getCpf();
+            case 2 -> medico.getNome();
+            case 3 -> medico.getIdade();
             default -> null;
         };
     }

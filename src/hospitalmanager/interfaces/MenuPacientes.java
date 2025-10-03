@@ -24,8 +24,9 @@ public class MenuPacientes extends JFrame {
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Pacientes");
 
         TabelaPacientes modeloPaciente = new TabelaPacientes(passada.getSistema().getPacientes());
-        JTable tablea = new JTable(modeloPaciente);
-        add(tablea,BorderLayout.CENTER);
+        JTable tabela = new JTable(modeloPaciente);
+        JScrollPane scrollPane = new JScrollPane(tabela);
+        this.add(scrollPane,BorderLayout.CENTER);
 
         setVisible(true);
     }
