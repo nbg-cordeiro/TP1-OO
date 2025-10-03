@@ -1,0 +1,104 @@
+        Medico medico1 = new Medico("123456", "101.202.303-01", "Dr. Carlos Andrade", 45);
+        sistema.addMedico(medico1);
+
+        Medico medico2 = new Medico("234567", "202.303.404-02", "Dra. Beatriz Martins", 38);
+        sistema.addMedico(medico2);
+
+        Medico medico3 = new Medico("345678", "303.404.505-03", "Dr. Leonardo Schmidt", 52);
+        sistema.addMedico(medico3);
+
+        Medico medico4 = new Medico("456789", "404.505.606-04", "Dra. Juliana Ribeiro", 31);
+        sistema.addMedico(medico4);
+
+        Medico medico5 = new Medico("567890", "505.606.707-05", "Dr. Fernando Guimarães", 60);
+        sistema.addMedico(medico5);
+
+        Medico medico6 = new Medico("678901", "606.707.808-06", "Dra. Patrícia da Mata", 41);
+        sistema.addMedico(medico6);
+
+        Medico medico7 = new Medico("789012", "707.808.909-07", "Dr. Roberto Vasconcelos", 39);
+        sistema.addMedico(medico7);
+
+        Medico medico8 = new Medico("890123", "808.909.010-08", "Dra. Vanessa Aragão", 29);
+        sistema.addMedico(medico8);
+
+        Medico medico9 = new Medico("901234", "909.010.111-09", "Dr. Gustavo Nogueira", 48);
+        sistema.addMedico(medico9);
+
+        Medico medico10 = new Medico("012345", "010.111.212-10", "Dra. Sandra Tavares", 55);
+        sistema.addMedico(medico10);
+
+        Medico medico11 = new Medico("112233", "111.212.313-11", "Dr. André Bastos", 33);
+        sistema.addMedico(medico11);
+
+        Medico medico12 = new Medico("223344", "212.313.414-12", "Dra. Flávia Drummond", 43);
+        sistema.addMedico(medico12);
+
+        Medico medico13 = new Medico("334455", "313.414.515-13", "Dr. Marcelo Peixoto", 58);
+        sistema.addMedico(medico13);
+
+        Medico medico14 = new Medico("445566", "414.515.616-14", "Dra. Cláudia Lins", 47);
+        sistema.addMedico(medico14);
+
+        Medico medico15 = new Medico("556677", "515.616.717-15", "Dr. Eduardo Macedo", 36);
+        sistema.addMedico(medico15);
+
+        Medico medico16 = new Medico("667788", "616.717.818-16", "Dra. Mônica Brandão", 51);
+        sistema.addMedico(medico16);
+
+        Medico medico17 = new Medico("778899", "717.818.919-17", "Dr. Diogo Cintra", 30);
+        sistema.addMedico(medico17);
+
+        Medico medico18 = new Medico("889900", "818.919.020-18", "Dra. Renata Guedes", 44);
+        sistema.addMedico(medico18);
+
+        Medico medico19 = new Medico("990011", "919.020.121-19", "Dr. Tiago Bernardes", 32);
+        sistema.addMedico(medico19);
+
+        Medico medico20 = new Medico("001122", "020.121.222-20", "Dra. Aline Sampaio", 37);
+        sistema.addMedico(medico20);
+
+        Medico medico21 = new Medico("102030", "121.222.323-21", "Dr. Vinícius Camargo", 49);
+        sistema.addMedico(medico21);
+
+        Medico medico22 = new Medico("203040", "222.323.424-22", "Dra. Cíntia Dantas", 53);
+        sistema.addMedico(medico22);
+
+        Medico medico23 = new Medico("304050", "323.424.525-23", "Dr. Rogério Esteves", 62);
+        sistema.addMedico(medico23);
+
+        Medico medico24 = new Medico("405060", "424.525.626-24", "Dra. Thaís Valente", 28);
+        sistema.addMedico(medico24);
+
+        Medico medico25 = new Medico("506070", "525.626.727-25", "Dr. Fábio Goulart", 46);
+        sistema.addMedico(medico25);
+
+        Medico medico26 = new Medico("607080", "626.727.828-26", "Dra. Daniela Pires", 35);
+        sistema.addMedico(medico26);
+
+        Medico medico27 = new Medico("708090", "727.828.929-27", "Dr. Anderson Frota", 50);
+        sistema.addMedico(medico27);
+
+        Medico medico28 = new Medico("809000", "828.929.030-28", "Dra. Paula Quintela", 57);
+        sistema.addMedico(medico28);
+
+        Medico medico29 = new Medico("900010", "929.030.131-29", "Dr. Igor Castelo", 34);
+        sistema.addMedico(medico29);
+
+        Medico medico30 = new Medico("000102", "030.131.232-30", "Dra. Rafaela Neves", 42);
+        sistema.addMedico(medico30);
+
+        Medico medico31 = new Medico("111023", "131.232.333-31", "Dr. Benício Torres", 65);
+        sistema.addMedico(medico31);
+
+        Medico medico32 = new Medico("222134", "232.333.434-32", "Dra. Lorena Franco", 31);
+        sistema.addMedico(medico32);
+
+        Medico medico33 = new Medico("333245", "333.434.535-33", "Dr. Samuel Ramalho", 54);
+        sistema.addMedico(medico33);
+
+        Medico medico34 = new Medico("444356", "434.535.636-34", "Dra. Estela Matos", 40);
+        sistema.addMedico(medico34);
+
+        Medico medico35 = new Medico("555467", "535.636.737-35", "Dr. Davi Lucca Mourão", 29);
+        sistema.addMedico(medico35);

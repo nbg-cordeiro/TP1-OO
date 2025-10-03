@@ -22,10 +22,11 @@ public class MenuPacientes extends JFrame {
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,passada);
         Painelnferior painelnferior = new Painelnferior(this,botaoFechar,botaoVoltar);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Pacientes");
-        setVisible(true);
 
         TabelaPacientes modeloPaciente = new TabelaPacientes(passada.getSistema().getPacientes());
         JTable tablea = new JTable(modeloPaciente);
         add(tablea,BorderLayout.CENTER);
+
+        setVisible(true);
     }
 }

@@ -1,0 +1,105 @@
+
+        Paciente paciente1 = new Paciente("111.222.333-44", "Ana Clara Sousa", 28);
+        sistema.addPaciente(paciente1);
+
+        Paciente paciente2 = new Paciente("222.333.444-55", "Bruno Costa Oliveira", 45);
+        sistema.addPaciente(paciente2);
+
+        Paciente paciente3 = new Paciente("333.444.555-66", "Carla Dias Ferreira", 19);
+        sistema.addPaciente(paciente3);
+
+        Paciente paciente4 = new Paciente("444.555.666-77", "Davi Martins Rodrigues", 8);
+        sistema.addPaciente(paciente4);
+
+        Paciente paciente5 = new Paciente("555.666.777-88", "Eduarda Gomes Almeida", 34);
+        sistema.addPaciente(paciente5);
+
+        Paciente paciente6 = new Paciente("666.777.888-99", "Felipe Azevedo Barros", 52);
+        sistema.addPaciente(paciente6);
+
+        Paciente paciente7 = new Paciente("777.888.999-00", "Gabriela Lima Santos", 22);
+        sistema.addPaciente(paciente7);
+
+        Paciente paciente8 = new Paciente("888.999.000-11", "Heitor Pereira Cardoso", 76);
+        sistema.addPaciente(paciente8);
+
+        Paciente paciente9 = new Paciente("999.000.111-22", "Isabela Ribeiro Correia", 31);
+        sistema.addPaciente(paciente9);
+
+        Paciente paciente10 = new Paciente("000.111.222-33", "João Vitor Monteiro", 61);
+        sistema.addPaciente(paciente10);
+
+        Paciente paciente11 = new Paciente("123.456.789-01", "Larissa Mendes Nunes", 25);
+        sistema.addPaciente(paciente11);
+
+        Paciente paciente12 = new Paciente("234.567.890-12", "Marcos Vinícius Cunha", 40);
+        sistema.addPaciente(paciente12);
+
+        Paciente paciente13 = new Paciente("345.678.901-23", "Natália Fernandes Pinto", 12);
+        sistema.addPaciente(paciente13);
+
+        Paciente paciente14 = new Paciente("456.789.012-34", "Otávio Castro Ramos", 81);
+        sistema.addPaciente(paciente14);
+
+        Paciente paciente15 = new Paciente("567.890.123-45", "Patrícia Teixeira Sales", 29);
+        sistema.addPaciente(paciente15);
+
+        Paciente paciente16 = new Paciente("678.901.234-56", "Quintino Rocha Borges", 55);
+        sistema.addPaciente(paciente16);
+
+        Paciente paciente17 = new Paciente("789.012.345-67", "Rafael Silveira Farias", 38);
+        sistema.addPaciente(paciente17);
+
+        Paciente paciente18 = new Paciente("890.123.456-78", "Sofia Gonçalves Mota", 21);
+        sistema.addPaciente(paciente18);
+
+        Paciente paciente19 = new Paciente("901.234.567-89", "Thiago Nogueira Viana", 30);
+        sistema.addPaciente(paciente19);
+
+        Paciente paciente20 = new Paciente("012.345.678-90", "Úrsula Freitas Pires", 42);
+        sistema.addPaciente(paciente20);
+
+        Paciente paciente21 = new Paciente("112.233.445-56", "Valentina Rezende Macedo", 5);
+        sistema.addPaciente(paciente21);
+
+        Paciente paciente22 = new Paciente("223.344.556-67", "Wagner Barbosa Duarte", 67);
+        sistema.addPaciente(paciente22);
+
+        Paciente paciente23 = new Paciente("334.455.667-78", "Xavier Arantes Peixoto", 72);
+        sistema.addPaciente(paciente23);
+
+        Paciente paciente24 = new Paciente("445.566.778-89", "Yasmin Costela Santana", 18);
+        sistema.addPaciente(paciente24);
+
+        Paciente paciente25 = new Paciente("556.677.889-90", "Zélia Campos Melo", 89);
+        sistema.addPaciente(paciente25);
+
+        Paciente paciente26 = new Paciente("667.788.990-01", "Alexandre Moreira Lopes", 48);
+        sistema.addPaciente(paciente26);
+
+        Paciente paciente27 = new Paciente("778.899.001-12", "Beatriz Fogaça Neves", 26);
+        sistema.addPaciente(paciente27);
+
+        Paciente paciente28 = new Paciente("889.900.112-23", "Caio Vasconcelos Garcia", 33);
+        sistema.addPaciente(paciente28);
+
+        Paciente paciente29 = new Paciente("990.011.223-34", "Débora Matos Brandão", 50);
+        sistema.addPaciente(paciente29);
+
+        Paciente paciente30 = new Paciente("001.122.334-45", "Erick Siqueira Reis", 23);
+        sistema.addPaciente(paciente30);
+
+        Paciente paciente31 = new Paciente("113.322.441-15", "Fernanda Tavares Justo", 36);
+        sistema.addPaciente(paciente31);
+
+        Paciente paciente32 = new Paciente("224.433.552-26", "Guilherme Drummond Morais", 15);
+        sistema.addPaciente(paciente32);
+
+        Paciente paciente33 = new Paciente("335.544.663-37", "Helena Beltrão Chaves", 64);
+        sistema.addPaciente(paciente33);
+
+        Paciente paciente34 = new Paciente("446.655.774-48", "Igor Bernardes Gusmão", 29);
+        sistema.addPaciente(paciente34);
+
+        Paciente paciente35 = new Paciente("557.766.885-59", "Júlia Padrão Queiroz", 41);
+        sistema.addPaciente(paciente35);
