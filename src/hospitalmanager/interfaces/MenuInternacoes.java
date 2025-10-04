@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class MenuInternacoes extends JFrame {
     public MenuInternacoes(JFrame passada){
-        super("                   Hospital Manager - Menu Internações");
         setSize(500,500);
         setUndecorated(true);
         setLocationRelativeTo(null);

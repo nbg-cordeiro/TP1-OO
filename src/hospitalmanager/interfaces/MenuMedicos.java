@@ -11,7 +11,6 @@ import java.awt.*;
 
 public class MenuMedicos extends JFrame {
     public MenuMedicos(MenuInicial passada){
-        super("               Hospital Manager - Menu Medicos");
         setSize(500,500);
         setUndecorated(true);
         setLocationRelativeTo(null);

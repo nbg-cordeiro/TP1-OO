@@ -10,7 +10,6 @@ import java.awt.*;
 
 public class MenuPlanos extends JFrame{
     public MenuPlanos(JFrame passada){
-        super("                       Hospital Manager - Menu Planos de Saúde");
         setSize(500,500);
         setUndecorated(true);
         setLocationRelativeTo(null);

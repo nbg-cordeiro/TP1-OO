@@ -1,6 +1,11 @@
 package hospitalmanager.dominio;
 
-public class PlanoDeSaude {
+import java.io.Serial;
+
+public class PlanoDeSaude implements java.io.Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private String nome;
     private String codigo;
     private String tipo;

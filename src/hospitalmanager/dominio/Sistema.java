@@ -57,7 +57,7 @@ public class Sistema {
     {
         if(cpfJaExiste(paciente.getCpf()))
         {
-            System.out.println("Já existe um paciente cadastrado com este CPF!");
+            throw new RuntimeException("Já existe um paciente cadastrado com este CPF!");
         }
         else{
             pacientes.add(paciente);
