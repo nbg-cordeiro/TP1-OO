@@ -21,7 +21,6 @@ public class MenuPacientes extends JFrame {
         getContentPane().setBackground(Color.gray);
 
         JButton botaoAdicionar = getJButton(principal);
-
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar, botaoAdicionar);
@@ -55,7 +54,6 @@ public class MenuPacientes extends JFrame {
 
         botaoAdicionar.addActionListener(_ -> {
             MaskFormatter formatoCpf;
-            MaskFormatter formatoIdade;
             try {
                 formatoCpf = new MaskFormatter("###.###.###-##");
                 formatoCpf.setPlaceholderCharacter('_');
@@ -63,30 +61,28 @@ public class MenuPacientes extends JFrame {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                 throw new RuntimeException(e);
             }
-            try{
-                formatoIdade = new MaskFormatter("###");
-            }
-            catch (ParseException e) {
-                JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
-                throw new RuntimeException(e);
-            }
-            JFormattedTextField cpfField = new JFormattedTextField(formatoCpf);
-            JTextField nomeField = new JTextField();
-            JFormattedTextField idadeField = new JFormattedTextField(formatoIdade);
+            JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
+            JTextField campoNome = new JTextField();
+
+            SpinnerNumberModel modeloIdade = new SpinnerNumberModel(0, 0, 150, 1);
+            JSpinner campoIdade = new JSpinner(modeloIdade);
+            JSpinner.NumberEditor editor = (JSpinner.NumberEditor)campoIdade.getEditor();
+            editor.getFormat().setGroupingUsed(false);
+
             JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
             panel.add(new JLabel("CPF:"));
-            panel.add(cpfField);
+            panel.add(campoCpf);
             panel.add(new JLabel("Nome:"));
-            panel.add(nomeField);
+            panel.add(campoNome);
             panel.add(new JLabel("Idade:"));
-            panel.add(idadeField);
+            panel.add(campoIdade);
 
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Paciente",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
-                String cpf = cpfField.getText();
-                String nome = nomeField.getText();
-                String idade = idadeField.getText();
+                String cpf = campoCpf.getText();
+                String nome = campoNome.getText();
+                String idade = campoIdade.getValue().toString();
                 if(idade.isEmpty() || cpf.isEmpty() || nome.isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!");

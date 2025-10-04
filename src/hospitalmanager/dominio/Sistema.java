@@ -32,7 +32,7 @@ public class Sistema {
     public List<Consulta> getConsultas() {
         return consultas;
     }
-    public List<Paciente> getPacientes() {
+    public List<Paciente> getPacientes(){
         return pacientes;
     }
     public List<Medico> getMedicos() {
@@ -57,6 +57,7 @@ public class Sistema {
     {
         if(cpfJaExiste(paciente.getCpf()))
         {
+            System.out.println("Cpf já existe!");
             throw new RuntimeException("Já existe um paciente cadastrado com este CPF!");
         }
         else{
