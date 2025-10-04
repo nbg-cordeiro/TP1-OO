@@ -10,7 +10,15 @@ public class PainelInferior extends JPanel {
         setLayout(new GridLayout(1, 2, 250,250));
         setBackground(Color.darkGray);
         principal.add(this, BorderLayout.SOUTH);
-        setVisible(true);
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    }
+    public PainelInferior(JFrame principal, BotaoFechar botaoFechar, BotaoVoltar botaoVoltar, JButton outroBotao) {
+        setBackground(Color.darkGray);
+        setLayout(new GridLayout(1, 3, 65,65));
+        add(botaoVoltar);
+        add(outroBotao);
+        add(botaoFechar);
+        principal.add(this, BorderLayout.SOUTH);
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
     public PainelInferior(JFrame principal, BotaoFechar botaoFechar) {
@@ -18,7 +26,6 @@ public class PainelInferior extends JPanel {
         setBackground(Color.darkGray);
         setLayout(new FlowLayout(FlowLayout.RIGHT));
         principal.add(this, BorderLayout.SOUTH);
-        setVisible(true);
     }
 
 }

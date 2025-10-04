@@ -15,7 +15,6 @@ public class PainelTitulo extends JPanel {
         Border bordaInferior = BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY);
         Border margemInterna = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(bordaInferior, margemInterna));
-        setVisible(true);
         principal.add(this,BorderLayout.NORTH);
     }
 }

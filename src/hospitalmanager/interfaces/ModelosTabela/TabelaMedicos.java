@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TabelaMedicos extends AbstractTableModel {
     private final List<Medico> medicos;
-    private final String[] colunas = {"CRM", "CPF","Nome", "Idade"};
+    private final String[] colunas = {"CRM", "CPF","Nome", "Idade","Agenda"};
 
     public TabelaMedicos(List<Medico> medicos) {
         this.medicos = medicos;
@@ -34,9 +34,38 @@ public class TabelaMedicos extends AbstractTableModel {
         return switch (columnIndex){
             case 0 -> medico.getCrm();
             case 1 -> medico.getCpf();
-            case 2 -> medico.getNome();
+            case 2 -> "    "+medico.getNome();
             case 3 -> medico.getIdade();
+            case 4 -> "Ver";
             default -> null;
         };
+    }
+
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+        Medico medico = medicos.get(rowIndex);
+        switch (columnIndex){
+            case 0:
+                medico.setCrm( (String) aValue );
+                break;
+            case 1:
+                medico.setCpf( ((String) aValue).trim() );
+                break;
+            case 2:
+                medico.setNome( ((String) aValue).trim() );
+                break;
+            case 3:
+                try {
+                    medico.setIdade( Integer.parseInt(aValue.toString()) );
+                } catch (NumberFormatException e) {
+                    System.err.println("Formato invalido.");
+                }
+                break;
+        }
+        fireTableCellUpdated(rowIndex, columnIndex);
+    }
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex == 3;
     }
 }

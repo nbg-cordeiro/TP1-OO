@@ -30,14 +30,7 @@ public class Paciente extends Pessoa implements java.io.Serializable{
     public List<Consulta> getConsultas()
         {return historicoConsultas;}
 
-    public void listarConsultas()
-    {
-        for(Consulta consulta : historicoConsultas)
-        {
-            System.out.println(consulta.toString());
-        }
-    }
-
+    @Override
     public String toString()
     {
         return "-Nome: "+getNome()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();

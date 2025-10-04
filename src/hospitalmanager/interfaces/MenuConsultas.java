@@ -22,7 +22,6 @@ public class MenuConsultas extends JFrame {
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,passada);
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar);
         painelInferior.setVisible(true);
-        setVisible(true);
     }
 
 

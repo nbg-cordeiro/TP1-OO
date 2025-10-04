@@ -55,6 +55,8 @@ public class Consulta implements java.io.Serializable{
         {return local;}
     public LocalDateTime getDataHora()
         {return dataHora;}
+
+    @Override
     public String toString() {
         DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm");

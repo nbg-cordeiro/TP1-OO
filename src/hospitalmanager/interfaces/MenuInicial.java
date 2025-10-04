@@ -13,7 +13,7 @@ public class MenuInicial extends JFrame{
     private final Sistema sistema;
     public MenuInicial(Sistema sistema){
         this.sistema = sistema;
-        setSize(800,450);
+        setSize(500,500);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setLocationRelativeTo(null);
@@ -86,7 +86,6 @@ public class MenuInicial extends JFrame{
         BotaoFechar botaoFechar = new BotaoFechar(this);
         JPanel painelInferior = new PainelInferior(this,botaoFechar);
         painelInferior.setVisible(true);
-        setVisible(true);
     }
     public Sistema getSistema()
     {

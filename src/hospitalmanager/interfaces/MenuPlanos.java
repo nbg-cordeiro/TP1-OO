@@ -24,6 +24,5 @@ public class MenuPlanos extends JFrame{
         painelInferior.setBackground(Color.gray);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Pacientes");
         titulo.setVisible(true);
-        setVisible(true);
     }
 }

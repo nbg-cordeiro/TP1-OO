@@ -64,13 +64,6 @@ public class Sistema {
             System.out.println("Paciente cadastrado com sucesso!");
         }
     }
-    public void listarConsultas()
-    {
-        for(Consulta consulta : consultas)
-        {
-            System.out.println(consulta.toString());
-        }
-    }
     public static boolean cpfJaExiste(String cpf) {
         for (Paciente paciente : pacientes){
             if (paciente.getCpf().equals(cpf)) {

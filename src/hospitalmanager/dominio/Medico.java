@@ -33,13 +33,7 @@ public class Medico extends Pessoa implements java.io.Serializable{
     public String getCrm()
         {return crm;}
 
-    public void listarConsultas()
-    {
-        for(Consulta consulta : agenda)
-        {
-            System.out.println(consulta.toString());
-        }
-    }
+    @Override
     public String toString()
     {
         return "-Nome: "+getNome()+"\n-CRM: "+getCrm()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();

@@ -24,7 +24,5 @@ public class MenuInternacoes extends JFrame {
         painelInferior.setVisible(true);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Internações");
         titulo.setVisible(true);
-
-        setVisible(true);
     }
 }

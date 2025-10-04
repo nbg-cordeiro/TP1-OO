@@ -22,7 +22,5 @@ public class MenuGeral extends JFrame {
         painelInferior.setVisible(true);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Geral");
         titulo.setVisible(true);
-
-        setVisible(true);
     }
 }
