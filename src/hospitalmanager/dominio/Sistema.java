@@ -1,21 +1,24 @@
 package hospitalmanager.dominio;
 
-import hospitalmanager.persistencia.RegistroConsulta;
-import hospitalmanager.persistencia.RegistroMedico;
-import hospitalmanager.persistencia.RegistroPaciente;
+import hospitalmanager.persistencia.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Sistema {
     private static List<Paciente> pacientes =  new ArrayList<>();
     private static List<Medico> medicos = new ArrayList<>();
     private static List<Consulta> consultas= new ArrayList<>();
+    private static List<PlanoDeSaude> planos = new ArrayList<>();
+    private static List<Internacao> internacoes = new ArrayList<>();
 
     public Sistema()
     {
         pacientes = RegistroPaciente.ler();
         medicos = RegistroMedico.ler();
         consultas = RegistroConsulta.ler();
+        planos = RegistroPlanos.ler();
+        internacoes = RegistroInternacoes.ler();
     }
 
     public static void salvarTudo()
@@ -23,14 +26,22 @@ public class Sistema {
         try{
             RegistroMedico.escrever(medicos);
             RegistroPaciente.escrever(pacientes);
+            RegistroPlanos.escrever(planos);
             RegistroConsulta.escrever(consultas);
+            RegistroInternacoes.escrever(internacoes);
             System.out.println("Dados salvos com sucesso!");
         }catch(Exception e){
             System.out.println("Erro no salvamento"+e.getMessage());
         }
     }
+    public List<PlanoDeSaude> getPlanos() {
+        return planos;
+    }
     public List<Consulta> getConsultas() {
         return consultas;
+    }
+    public List<Internacao> getInternacoes() {
+        return internacoes;
     }
     public List<Paciente> getPacientes(){
         return pacientes;

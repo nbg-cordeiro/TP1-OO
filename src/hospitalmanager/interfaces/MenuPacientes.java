@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class MenuPacientes extends JFrame {
     public MenuPacientes(MenuInicial principal){
@@ -30,7 +32,10 @@ public class MenuPacientes extends JFrame {
 
         TabelaPacientes modeloPaciente = new TabelaPacientes(principal.getSistema().getPacientes());
         JTable tabela = new JTable(modeloPaciente);
+        tabela.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);
+        scrollPane.setBackground(Color.gray);
+        scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
         javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
@@ -48,12 +53,14 @@ public class MenuPacientes extends JFrame {
 
     private static JButton getJButton(MenuInicial principal) {
         JButton botaoAdicionar = new JButton("Adicionar");
+        botaoAdicionar.setBackground(Color.LIGHT_GRAY);
         botaoAdicionar.setPreferredSize(new Dimension(120, 40));
         botaoAdicionar.setMaximumSize(new Dimension(120, 40));
         botaoAdicionar.setMinimumSize(new Dimension(120, 40));
 
         botaoAdicionar.addActionListener(_ -> {
             MaskFormatter formatoCpf;
+            MaskFormatter formatoNascimento;
             try {
                 formatoCpf = new MaskFormatter("###.###.###-##");
                 formatoCpf.setPlaceholderCharacter('_');
@@ -61,38 +68,42 @@ public class MenuPacientes extends JFrame {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                 throw new RuntimeException(e);
             }
+            try {
+                formatoNascimento = new MaskFormatter("DD/MM/YYYY");
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
+                throw new RuntimeException(e);
+            }
             JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
             JTextField campoNome = new JTextField();
 
-            SpinnerNumberModel modeloIdade = new SpinnerNumberModel(0, 0, 150, 1);
-            JSpinner campoIdade = new JSpinner(modeloIdade);
-            JSpinner.NumberEditor editor = (JSpinner.NumberEditor)campoIdade.getEditor();
-            editor.getFormat().setGroupingUsed(false);
+            JFormattedTextField campoNascimento = new JFormattedTextField(formatoNascimento);
 
             JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
             panel.add(new JLabel("CPF:"));
             panel.add(campoCpf);
             panel.add(new JLabel("Nome:"));
             panel.add(campoNome);
-            panel.add(new JLabel("Idade:"));
-            panel.add(campoIdade);
+            panel.add(new JLabel("Data de Nascimento (DD/MM/YYYY):"));
+            panel.add(campoNascimento);
 
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Paciente",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
                 String cpf = campoCpf.getText();
                 String nome = campoNome.getText();
-                String idade = campoIdade.getValue().toString();
-                if(idade.isEmpty() || cpf.isEmpty() || nome.isEmpty())
-                {
+                String dataNascimentoStr = campoNascimento.getText();
+                if (nome.isEmpty() || cpf.contains("_") || dataNascimentoStr.contains("_")){
                     JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!");
                 }
                 else{
-                    Paciente paciente = new Paciente(cpf, nome, Integer.parseInt(idade));
                     try{
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+                        Paciente paciente = new Paciente(cpf, nome, dataNascimento);
                         principal.getSistema().addPaciente(paciente);
                         JOptionPane.showMessageDialog(null,
-                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + idade, "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
+                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + paciente.getIdade(), "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                     }

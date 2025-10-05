@@ -50,19 +50,12 @@ public class TabelaPacientes extends AbstractTableModel {
             case 1:
                 paciente.setNome( ((String) aValue).trim() );
                 break;
-            case 2:
-                try {
-                    paciente.setIdade( Integer.parseInt(aValue.toString()) );
-                } catch (NumberFormatException e) {
-                    System.err.println("Formato invalido.");
-                }
-                break;
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2;
+        return columnIndex == 0 || columnIndex == 1;
     }
 }
 

@@ -1,6 +1,7 @@
 package hospitalmanager.dominio;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Paciente extends Pessoa implements java.io.Serializable{
@@ -8,14 +9,17 @@ public class Paciente extends Pessoa implements java.io.Serializable{
     private static final long serialVersionUID = 1L;
     List<Consulta> historicoConsultas =  new ArrayList<>();
 
-    public Paciente(String cpf, String nome, int idade,List<Consulta> consultas)
+    public Paciente(){
+        super();
+    }
+    public Paciente(String cpf, String nome, LocalDate dataNascimento, List<Consulta> consultas, PlanoDeSaude planoDeSaude)
     {
-        super(cpf ,nome ,idade);
+        super(cpf ,nome ,dataNascimento);
         this.historicoConsultas = consultas;
     }
-    public Paciente(String cpf, String nome, int idade)
+    public Paciente(String cpf, String nome, LocalDate dataNascimento)
     {
-        super(cpf ,nome ,idade);
+        super(cpf ,nome ,dataNascimento);
     }
 
     public void adicionarConsulta(Consulta consulta)

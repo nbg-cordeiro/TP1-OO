@@ -11,6 +11,8 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class MenuMedicos extends JFrame {
     public MenuMedicos(MenuInicial principal){
@@ -19,6 +21,7 @@ public class MenuMedicos extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.gray);
+
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
         JButton botaoAdicionar = getJButton(principal);
@@ -29,7 +32,10 @@ public class MenuMedicos extends JFrame {
         titulo.setVisible(true);
         TabelaMedicos modeloMedico = new TabelaMedicos(principal.getSistema().getMedicos());
         JTable tabela = new JTable(modeloMedico);
+        tabela.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);
+        scrollPane.setBackground(Color.gray);
+        scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
         javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
@@ -48,15 +54,24 @@ public class MenuMedicos extends JFrame {
     }
     private static JButton getJButton(MenuInicial principal) {
         JButton botaoAdicionar = new JButton("Adicionar");
+        botaoAdicionar.setBackground(Color.LIGHT_GRAY);
         botaoAdicionar.setPreferredSize(new Dimension(120, 40));
         botaoAdicionar.setMaximumSize(new Dimension(120, 40));
         botaoAdicionar.setMinimumSize(new Dimension(120, 40));
 
         botaoAdicionar.addActionListener(_ -> {
             MaskFormatter formatoCpf;
+            MaskFormatter formatoNascimento;
             try {
                 formatoCpf = new MaskFormatter("###.###.###-##");
                 formatoCpf.setPlaceholderCharacter('_');
+            } catch (ParseException e) {
+                JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);
+                throw new RuntimeException(e);
+            }
+            try{
+                formatoNascimento = new MaskFormatter("##/##/####");
+                formatoNascimento.setPlaceholderCharacter('_');
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);
                 throw new RuntimeException(e);
@@ -66,10 +81,7 @@ public class MenuMedicos extends JFrame {
             JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
             JTextField campoNome = new JTextField();
 
-            SpinnerNumberModel modeloIdade = new SpinnerNumberModel(0, 0, 150, 1);
-            JSpinner campoIdade = new JSpinner(modeloIdade);
-            JSpinner.NumberEditor editor = (JSpinner.NumberEditor)campoIdade.getEditor();
-            editor.getFormat().setGroupingUsed(false);
+            JFormattedTextField campoDataNascimento = new JFormattedTextField(formatoNascimento);
 
             JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
 
@@ -79,26 +91,28 @@ public class MenuMedicos extends JFrame {
             panel.add(campoCpf);
             panel.add(new JLabel("Nome:"));
             panel.add(campoNome);
-            panel.add(new JLabel("Idade:"));
-            panel.add(campoIdade);
+            panel.add(new JLabel("Data de Nascimento (DD/MM/YYYY):"));
+            panel.add(campoDataNascimento);
 
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Medico",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
                 String crm = campoCrm.getText();
-                String idade = campoIdade.getValue().toString();
+                String dataNascimentoStr = campoDataNascimento.getText();
                 String nome = campoNome.getText();
                 String cpf = campoCpf.getText();
-                if(idade.isEmpty() || cpf.isEmpty() || nome.isEmpty() || crm.isEmpty())
+                if(cpf.contains("_") || dataNascimentoStr.contains("_") || nome.isEmpty() || crm.isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!","Aviso",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    Medico medico = new Medico(crm, cpf, nome, Integer.parseInt(idade));
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+                    Medico medico = new Medico(crm, cpf, nome, dataNascimento);
                     try{
                         principal.getSistema().addMedico(medico);
                         JOptionPane.showMessageDialog(null,
-                                "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + idade, "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
+                                "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + medico.getIdade(), "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);
                     }

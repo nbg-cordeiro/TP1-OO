@@ -20,6 +20,7 @@ public class Consulta implements java.io.Serializable{
         this.dataHora = dataHora;
         this.local = local;
         this.motivo = motivo;
+        this.status = "Marcada";
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
     }
@@ -41,6 +42,9 @@ public class Consulta implements java.io.Serializable{
             medico.removerConsulta(this);
             paciente.removerConsulta(this);
             this.status = "Cancelada";
+        }
+        public double getPreco(){
+            return 119.99;
         }
 
     public String getMotivo()

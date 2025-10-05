@@ -73,14 +73,16 @@ public class MenuInicial extends JFrame{
         });
         JPanel painelBotoes = new JPanel();
         painelBotoes.setBackground(Color.gray);
-        painelBotoes.setLayout(new GridLayout(3, 2, 10,10));
-        painelBotoes.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
-        painelBotoes.add(botaoGeral);
-        painelBotoes.add(botaoPlanos);
+        painelBotoes.setLayout(new GridLayout(3, 2, 40,40));
+        painelBotoes.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+
         painelBotoes.add(botaoConsultas);
         painelBotoes.add(botaoInternacoes);
         painelBotoes.add(botaoPacientes);
         painelBotoes.add(botaoMedicos);
+        painelBotoes.add(botaoPlanos);
+        painelBotoes.add(botaoGeral);
         add(painelBotoes, BorderLayout.CENTER);
 
         BotaoFechar botaoFechar = new BotaoFechar(this);

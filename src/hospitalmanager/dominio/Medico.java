@@ -1,6 +1,7 @@
 package hospitalmanager.dominio;
 
 import java.io.Serial;
+import java.time.LocalDate;
 import java.util.*;
 
 public class Medico extends Pessoa implements java.io.Serializable{
@@ -9,14 +10,14 @@ public class Medico extends Pessoa implements java.io.Serializable{
     private String crm;
     List<Consulta> agenda =  new ArrayList<>();
 
-    public Medico(String crm, String cpf, String nome, int idade)
+    public Medico(String crm, String cpf, String nome, LocalDate dataNascimento)
     {
-        super(cpf,nome,idade);
+        super(cpf,nome,dataNascimento);
         this.crm = crm;
     }
-    public Medico(String crm, String cpf, String nome, int idade, List<Consulta> consultas)
+    public Medico(String crm, String cpf, String nome, LocalDate dataNascimento, List<Consulta> consultas)
     {
-        super(cpf,nome,idade);
+        super(cpf,nome,dataNascimento);
         this.crm = crm;
         this.agenda = consultas;
     }

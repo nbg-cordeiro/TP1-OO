@@ -1,6 +1,9 @@
 package hospitalmanager.persistencia;
 
 import hospitalmanager.dominio.Consulta;
+import hospitalmanager.dominio.Sistema;
+
+import javax.swing.*;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
@@ -31,7 +34,15 @@ public class RegistroConsulta{
             return new ArrayList<>();
         }
     }
-    public static void deletarRegistro() throws IOException {
-        deleteIfExists(Path.of("src/hospitalmanager/dados/Consultas.dat"));
+    public static void deletarRegistro(Sistema sistema) throws IOException {
+        int escolha =  JOptionPane.showConfirmDialog(null,"Você está prestes a deletar TODOS os registros de Consultas.\n Deseja Continuar?", "Aviso",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if(escolha == JOptionPane.OK_OPTION){
+            deleteIfExists(Path.of("src/hospitalmanager/dados/Consultas.dat"));
+            sistema.getConsultas().clear();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Operação cancelada.\n Nenhum registro foi deletado!");
+        }
     }
 }

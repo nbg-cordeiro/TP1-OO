@@ -54,18 +54,11 @@ public class TabelaMedicos extends AbstractTableModel {
             case 2:
                 medico.setNome( ((String) aValue).trim() );
                 break;
-            case 3:
-                try {
-                    medico.setIdade( Integer.parseInt(aValue.toString()) );
-                } catch (NumberFormatException e) {
-                    System.err.println("Formato invalido.");
-                }
-                break;
         }
         fireTableCellUpdated(rowIndex, columnIndex);
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex == 3;
+        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2;
     }
 }
