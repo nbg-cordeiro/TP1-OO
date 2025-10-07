@@ -82,20 +82,17 @@ public class MenuPlanos extends JFrame {
         });
         return botaoAdicionar;
     }
-    TableCellRenderer renderizadorCabecalho = new TableCellRenderer() {
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            JTextArea areaTexto = new JTextArea(value.toString());
-            areaTexto.setLineWrap(true);
-            areaTexto.setWrapStyleWord(true);
-            areaTexto.setOpaque(true);
-            areaTexto.setFont(table.getTableHeader().getFont());
-            areaTexto.setForeground(table.getTableHeader().getForeground());
-            areaTexto.setBackground(table.getTableHeader().getBackground());
-            areaTexto.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
-            areaTexto.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
-            areaTexto.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
-            return areaTexto;
-        }
+    TableCellRenderer renderizadorCabecalho = (table, value, _, _, _, _) -> {
+        JTextArea areaTexto = new JTextArea(value.toString());
+        areaTexto.setLineWrap(true);
+        areaTexto.setWrapStyleWord(true);
+        areaTexto.setOpaque(true);
+        areaTexto.setFont(table.getTableHeader().getFont());
+        areaTexto.setForeground(table.getTableHeader().getForeground());
+        areaTexto.setBackground(table.getTableHeader().getBackground());
+        areaTexto.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+        areaTexto.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+        areaTexto.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+        return areaTexto;
     };
 }

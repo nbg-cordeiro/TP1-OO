@@ -1,13 +1,10 @@
 package hospitalmanager.interfaces;
 
-import hospitalmanager.dominio.Medico;
-import hospitalmanager.dominio.Paciente;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-import java.time.LocalDate;
 
 import static hospitalmanager.persistencia.RegistroCSV.*;
 
@@ -106,5 +103,6 @@ public class MenuGeral extends JFrame {
     }
     public void adicionarObjetosTeste(MenuInicial principal)
     {
+
     }
 }

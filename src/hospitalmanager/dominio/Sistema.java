@@ -6,6 +6,7 @@ import static hospitalmanager.persistencia.RegistroCSV.*;
 
 public class Sistema {
     private static List<Paciente> pacientes =  new ArrayList<>();
+    private static List<PacienteEspecial> pacientesEspeciais = new ArrayList<>();
     private static List<Medico> medicos = new ArrayList<>();
     private static List<Consulta> consultas= new ArrayList<>();
     private static List<PlanoDeSaude> planos = new ArrayList<>();
@@ -16,6 +17,7 @@ public class Sistema {
         especialidades = lerEspecialidades();
         planos = lerPlanosDeSaude();
         pacientes = lerPacientes();
+        pacientesEspeciais = lerPacientesEspeciais(this);
         medicos = lerMedicos();
         internacoes = lerInternacoes(this);
         consultas = lerConsultas(this);
@@ -27,6 +29,7 @@ public class Sistema {
             escreverEspecialidades(especialidades);
             escreverPlanos(planos);
             escreverPacientes(pacientes);
+            escreverPacientesEspeciais(pacientesEspeciais);
             escreverMedicos(medicos);
             escreverInternacoes(internacoes);
             escreverConsultas(consultas);
@@ -46,6 +49,9 @@ public class Sistema {
     }
     public List<Paciente> getPacientes(){
         return pacientes;
+    }
+    public List<PacienteEspecial> getPacientesEspeciais(){
+        return pacientesEspeciais;
     }
     public List<Medico> getMedicos() {
         return medicos;
@@ -77,6 +83,18 @@ public class Sistema {
             System.out.println("Paciente cadastrado com sucesso!");
         }
     }
+    public void addPacienteEspecial(PacienteEspecial pacienteEspecial)
+    {
+        if(cpfJaExiste(pacienteEspecial.getCpf()))
+        {
+            System.out.println("Cpf já existe!");
+            throw new RuntimeException("Já existe um paciente cadastrado com este CPF!");
+        }
+        else{
+            pacientesEspeciais.add(pacienteEspecial);
+            System.out.println("Paciente cadastrado com sucesso!");
+        }
+    }
     public void addPlano(PlanoDeSaude plano)
     {
         planos.add(plano);
@@ -97,14 +115,6 @@ public class Sistema {
     public boolean crmJaExiste(String crm){
         for (Medico medico : medicos){
             if (medico.getCrm().equals(crm)){
-                return true;
-            }
-        }
-        return false;
-    }
-    public static boolean planoJaExiste(String crm){
-        for (PlanoDeSaude plano : planos){
-            if (plano.getCodigo().equals(crm)){
                 return true;
             }
         }

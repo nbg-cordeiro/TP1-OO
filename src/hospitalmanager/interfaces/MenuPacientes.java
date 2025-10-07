@@ -1,6 +1,8 @@
 package hospitalmanager.interfaces;
 
 import hospitalmanager.dominio.Paciente;
+import hospitalmanager.dominio.PacienteEspecial;
+import hospitalmanager.dominio.PlanoDeSaude;
 import hospitalmanager.interfaces.ModelosTabela.TabelaPacientes;
 import hospitalmanager.interfaces.elementos.*;
 
@@ -10,6 +12,7 @@ import java.awt.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class MenuPacientes extends JFrame {
     public MenuPacientes(MenuInicial principal){
@@ -67,10 +70,20 @@ public class MenuPacientes extends JFrame {
             }
             try {
                 formatoNascimento = new MaskFormatter("##/##/####");
+                formatoNascimento.setPlaceholderCharacter('_');
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                 throw new RuntimeException(e);
             }
+            String[] planosArray = new String[principal.getSistema().getPlanos().size() + 1];
+            planosArray[0] = "Nenhum";
+            int index = 1;
+            for (PlanoDeSaude plano : principal.getSistema().getPlanos()){
+                planosArray[index++] = plano.getCodigo() + " ("+plano.getNome()+")";
+            }
+
+            JComboBox<String> comboBoxPlanos = new JComboBox<>(planosArray);
+
             JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
             JTextField campoNome = new JTextField();
 
@@ -83,13 +96,17 @@ public class MenuPacientes extends JFrame {
             panel.add(campoNome);
             panel.add(new JLabel("Data de Nascimento (DD/MM/YYYY):"));
             panel.add(campoNascimento);
+            panel.add(new JLabel("Plano de Saúde:"));
+            panel.add(comboBoxPlanos);
 
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Paciente",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
+                PlanoDeSaude plano = principal.getSistema().getPlanos().get(comboBoxPlanos.getSelectedIndex());
                 String cpf = campoCpf.getText();
                 String nome = campoNome.getText();
                 String dataNascimentoStr = campoNascimento.getText();
+                int idade;
                 if (nome.isEmpty() || cpf.contains("_") || dataNascimentoStr.contains("_")){
                     JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!");
                 }
@@ -97,10 +114,18 @@ public class MenuPacientes extends JFrame {
                     try{
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
-                        Paciente paciente = new Paciente(cpf, nome, dataNascimento);
-                        principal.getSistema().addPaciente(paciente);
+                        if(comboBoxPlanos.getSelectedIndex()==0){
+                            Paciente paciente = new Paciente(cpf, nome, dataNascimento);
+                            idade = paciente.getIdade();
+                            principal.getSistema().addPaciente(paciente);
+                        }
+                        else{
+                            PacienteEspecial pacienteEspecial = new PacienteEspecial(cpf, nome, dataNascimento,plano);
+                            principal.getSistema().addPacienteEspecial(pacienteEspecial);
+                            idade = pacienteEspecial.getIdade();
+                        }
                         JOptionPane.showMessageDialog(null,
-                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + paciente.getIdade(), "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
+                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\nIdade:"+ idade +"\nIdade"+"\nCódigo Plano de Saúde:"+planosArray[comboBoxPlanos.getSelectedIndex()], "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                     }

@@ -51,6 +51,18 @@ public class RegistroCSV {
         }
     }
 
+    public static void escreverPacientesEspeciais(List<PacienteEspecial> pacientesEspeciais) {
+        caminho = pasta + "PacientesEspeciais.csv";
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(caminho), StandardCharsets.UTF_8)) {
+            for (PacienteEspecial paci : pacientesEspeciais) {
+                writer.write(paci.toString());
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            System.err.println("Erro ao escrever em " + caminho + ": " + e.getMessage());
+        }
+    }
+
     public static void escreverMedicos(List<Medico> medicos) {
         caminho = pasta + "Medicos.csv";
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(caminho), StandardCharsets.UTF_8)) {
@@ -159,6 +171,33 @@ public class RegistroCSV {
             System.err.println("Erro ao ler Pacientes: " + e.getMessage());
         }
         return pacientes;
+    }
+
+    public static List<PacienteEspecial> lerPacientesEspeciais(Sistema sistema) {
+        caminho = pasta + "PacientesEspeciais.csv";
+        Path path = Path.of(caminho);
+        List<PacienteEspecial> pacientesEspeciais = new ArrayList<>();
+
+        if (!Files.exists(path)) {
+            System.out.println("Registros não encontrados, inicializando Pacientes Especiais vazios: " + caminho);
+            return pacientesEspeciais;
+        }
+        try (BufferedReader leitor = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            String linha;
+            while ((linha = leitor.readLine()) != null) {
+                String[] colunas = linha.split(",");
+                String cpf = colunas[0].trim();
+                String nome = colunas[1].trim();
+                LocalDate nascimento = LocalDate.parse(colunas[2].trim());
+                String codigo = colunas[3].trim();
+                PacienteEspecial pacienteEspecial = new PacienteEspecial(cpf, nome, nascimento,acharPlano(codigo,sistema.getPlanos()));
+                pacientesEspeciais.add(pacienteEspecial);
+            }
+            System.out.println("Pacientes lidos com sucesso!");
+        } catch (IOException e){
+            System.err.println("Erro ao ler Pacientes: " + e.getMessage());
+        }
+        return pacientesEspeciais;
     }
 
     public static List<Medico> lerMedicos() {
@@ -284,6 +323,18 @@ public class RegistroCSV {
         }
     }
 
+    public static void deletarPacientesEspeciais(Sistema sistema) throws IOException {
+        int escolha = JOptionPane.showConfirmDialog(null, "Você está prestes a deletar TODOS os registros de Pacientes Especiais.\n Deseja Continuar?", "Aviso",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (escolha == JOptionPane.OK_OPTION) {
+            deleteIfExists(Path.of("src/hospitalmanager/dados/PacientesEspeciais.csv"));
+            sistema.getPacientesEspeciais().clear();
+            System.err.println("Pacientes Especiais Deletados!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Operação cancelada.\n Nenhum registro foi deletado!");
+        }
+    }
+
     public static void deletarMedicos(Sistema sistema) throws IOException {
         int escolha = JOptionPane.showConfirmDialog(null, "Você está prestes a deletar TODOS os registros de Medicos.\n Deseja Continuar?", "Aviso",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -328,7 +379,14 @@ public class RegistroCSV {
         }
         return new Paciente(null, null, null);
     }
-
+    public static PlanoDeSaude acharPlano(String codigo, List<PlanoDeSaude> planos) {
+        for (PlanoDeSaude p : planos) {
+            if (p.getCodigo().equals(codigo)){
+                return p;
+            }
+        }
+        return new PlanoDeSaude(null, null, null,null);
+    }
     public static Medico acharMedico(String crm, List<Medico> medicos) {
         for (Medico m : medicos) {
             if (m.getCrm().equals(crm)) {

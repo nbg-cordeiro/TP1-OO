@@ -5,7 +5,7 @@ import java.util.*;
 
 public class Medico extends Pessoa{
     private String crm;
-    private String especialidade;
+    private final String especialidade;
     List<Consulta> agenda =  new ArrayList<>();
 
     public Medico(String crm, String cpf, String nome, LocalDate dataNascimento,String  especialidade)
@@ -16,9 +16,6 @@ public class Medico extends Pessoa{
     }
     public String getEspecialidade(){
         return especialidade;
-    }
-    public void setEspecialidade(String especialidade){
-        this.especialidade = especialidade;
     }
     public void setCrm(String crm)
         {this.crm = crm;}
