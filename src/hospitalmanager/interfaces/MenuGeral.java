@@ -25,6 +25,8 @@ public class MenuGeral extends JFrame {
         botaoCasosDeTeste.setBackground(Color.lightGray);
         JButton botaoDelPacientes = new JButton("Deletar Pacientes");
         botaoDelPacientes.setBackground(Color.pink);
+        botaoDelPacientes.setForeground(Color.RED);JButton botaoDelPacientesEspeciais = new JButton("Deletar Especiais");
+        botaoDelPacientes.setBackground(Color.pink);
         botaoDelPacientes.setForeground(Color.RED);
         JButton botaoDelConsultas = new JButton("Deletar Consultas");
         botaoDelConsultas.setBackground(Color.pink);
@@ -45,6 +47,7 @@ public class MenuGeral extends JFrame {
         painelBotoes.add(botaoCasosDeTeste);
         painelBotoes.add(botaoDelPacientes);
         painelBotoes.add(botaoDelMedicos);
+        painelBotoes.add(botaoDelPacientesEspeciais);
         painelBotoes.add(botaoDelPlanos);
         painelBotoes.add(botaoDelConsultas);
         painelBotoes.add(botaoDelInternacoes);
@@ -75,6 +78,13 @@ public class MenuGeral extends JFrame {
         botaoDelPacientes.addActionListener(_ -> {
             try {
                 deletarPacientes(principal.getSistema());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+        botaoDelPacientesEspeciais.addActionListener(_ -> {
+            try {
+                deletarPacientesEspeciais(principal.getSistema());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

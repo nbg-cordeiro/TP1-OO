@@ -137,7 +137,6 @@ public class MenuPacientes extends JFrame {
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Paciente",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
-                PlanoDeSaude plano = principal.getSistema().getPlanos().get(comboBoxPlanos.getSelectedIndex());
                 String cpf = campoCpf.getText();
                 String nome = campoNome.getText();
                 String dataNascimentoStr = campoNascimento.getText();
@@ -149,12 +148,16 @@ public class MenuPacientes extends JFrame {
                     try{
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+                        if(dataNascimento.isAfter(LocalDate.now())){
+                            throw new Exception("Data de nascimento invalida!");
+                        }
                         if(comboBoxPlanos.getSelectedIndex()==0){
                             Paciente paciente = new Paciente(cpf, nome, dataNascimento);
                             idade = paciente.getIdade();
                             principal.getSistema().addPaciente(paciente);
                         }
                         else{
+                            PlanoDeSaude plano = principal.getSistema().getPlanos().get(comboBoxPlanos.getSelectedIndex());
                             PacienteEspecial pacienteEspecial = new PacienteEspecial(cpf, nome, dataNascimento,plano);
                             principal.getSistema().addPacienteEspecial(pacienteEspecial);
                             idade = pacienteEspecial.getIdade();
@@ -162,7 +165,9 @@ public class MenuPacientes extends JFrame {
                         JOptionPane.showMessageDialog(null,
                                 "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\nIdade:"+ idade +"\nIdade"+"\nCódigo Plano de Saúde:"+planosArray[comboBoxPlanos.getSelectedIndex()], "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
                     }catch(Exception e){
-                        JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
+                        JOptionPane.showMessageDialog(null,"Um erro ocorreu: \n"+e.getMessage());
+                        JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
+
                     }
                 }
             } else {
