@@ -21,6 +21,16 @@ public class PainelInferior extends JPanel {
         principal.add(this, BorderLayout.SOUTH);
         setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
     }
+    public PainelInferior(JFrame principal, BotaoFechar botaoFechar, BotaoVoltar botaoVoltar, JButton outroBotao, JButton maisUm) {
+        setBackground(Color.darkGray);
+        setLayout(new GridLayout(1, 4, 3,4));
+        add(botaoVoltar);
+        add(outroBotao);
+        add(maisUm);
+        add(botaoFechar);
+        principal.add(this, BorderLayout.SOUTH);
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 4));
+    }
     public PainelInferior(JFrame principal, BotaoFechar botaoFechar) {
         add(botaoFechar);
         setBackground(Color.darkGray);

@@ -4,15 +4,17 @@ import hospitalmanager.dominio.Paciente;
 import hospitalmanager.dominio.PacienteEspecial;
 import hospitalmanager.dominio.PlanoDeSaude;
 import hospitalmanager.interfaces.ModelosTabela.TabelaPacientes;
+import hospitalmanager.interfaces.ModelosTabela.TabelaPacientesEspeciais;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 public class MenuPacientes extends JFrame {
     public MenuPacientes(MenuInicial principal){
@@ -25,30 +27,63 @@ public class MenuPacientes extends JFrame {
         JButton botaoAdicionar = getJButton(principal);
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
-        PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar, botaoAdicionar);
-        painelInferior.setBackground(Color.DARK_GRAY);
+
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Pacientes");
         titulo.setVisible(true);
 
         TabelaPacientes modeloPaciente = new TabelaPacientes(principal.getSistema().getPacientes());
+        TabelaPacientesEspeciais modeloEspecial = new TabelaPacientesEspeciais(principal.getSistema().getPacientesEspeciais());
         JTable tabela = new JTable(modeloPaciente);
+        JTable tabelaEspecial = new JTable(modeloEspecial);
+
         tabela.setBackground(Color.lightGray);
+        tabelaEspecial.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);
         scrollPane.setBackground(Color.gray);
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
-        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        javax.swing.table.TableColumnModel columnModel = tabela.getColumnModel();
-
+        TableColumnModel columnModel = tabela.getColumnModel();
+        TableColumnModel columnModeloEsp = tabelaEspecial.getColumnModel();
         columnModel.getColumn(0).setCellRenderer(centerRenderer);
-        columnModel.getColumn(2).setCellRenderer(centerRenderer);
-        columnModel.getColumn(3).setCellRenderer(centerRenderer);
+        for(int i=0;i<4;i++)
+        {
+            columnModel.getColumn(i).setCellRenderer(centerRenderer);
+            columnModeloEsp.getColumn(i).setCellRenderer(centerRenderer);
+            columnModeloEsp.getColumn(i+1).setCellRenderer(centerRenderer);
+        }
         tabela.getColumnModel().getColumn(0).setMaxWidth(100);
+        tabelaEspecial.getColumnModel().getColumn(0).setMaxWidth(100);
         tabela.getColumnModel().getColumn(0).setMinWidth(100);
+        tabelaEspecial.getColumnModel().getColumn(0).setMinWidth(100);
         tabela.getColumnModel().getColumn(2).setMaxWidth(50);
+        tabelaEspecial.getColumnModel().getColumn(2).setMaxWidth(50);
         tabela.getColumnModel().getColumn(3).setMaxWidth(60);
+        tabelaEspecial.getColumnModel().getColumn(4).setMaxWidth(60);
+
+        JButton botaoAlternar = new JButton("Alternar");
+        botaoAlternar.setBackground(Color.lightGray);
+        botaoAlternar.addActionListener(_ -> {
+            if(scrollPane.getViewport().getView() == tabela)
+            {
+                scrollPane.setViewportView(tabelaEspecial);
+                tabelaEspecial.setVisible(true);
+                modeloEspecial.fireTableDataChanged();
+
+                tabela.setVisible(false);
+            }
+            else{
+                scrollPane.setViewportView(tabela);
+                tabela.setVisible(true);
+                modeloPaciente.fireTableDataChanged();
+                tabelaEspecial.setVisible(false);
+            }
+        });
+
+        PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar, botaoAdicionar, botaoAlternar);
+        painelInferior.setBackground(Color.DARK_GRAY);
     }
 
     private static JButton getJButton(MenuInicial principal) {
