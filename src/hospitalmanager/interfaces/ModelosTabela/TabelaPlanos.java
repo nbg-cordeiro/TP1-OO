@@ -8,7 +8,7 @@ import java.util.List;
 public class TabelaPlanos extends AbstractTableModel {
 
     private final List<PlanoDeSaude> planos;
-    private final String[] colunas = {"Codigo", "Nome", "Desconto em \n Consultas (%)","Desconto em \n Internações (%)"};
+    private final String[] colunas = {"Codigo", "Nome", "Desconto em\nConsultas (%)","Desconto em\nInternações (%)"};
 
     public TabelaPlanos(List<PlanoDeSaude> planos) {
         this.planos = planos;

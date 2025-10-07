@@ -20,16 +20,20 @@ public class MenuMedicos extends JFrame {
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.gray);
 
+        TabelaMedicos modeloMedico = new TabelaMedicos(principal.getSistema().getMedicos());
+
+        JButton botaoAdicionar = getJButton(principal,modeloMedico);
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
-        JButton botaoAdicionar = getJButton(principal);
+
+        JTable tabela = new JTable(modeloMedico);
 
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar,botaoAdicionar);
         painelInferior.setBackground(Color.DARK_GRAY);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Medicos");
         titulo.setVisible(true);
-        TabelaMedicos modeloMedico = new TabelaMedicos(principal.getSistema().getMedicos());
-        JTable tabela = new JTable(modeloMedico);
+
+
         tabela.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);
         scrollPane.setBackground(Color.gray);
@@ -44,13 +48,14 @@ public class MenuMedicos extends JFrame {
         columnModel.getColumn(1).setCellRenderer(centerRenderer);
         columnModel.getColumn(3).setCellRenderer(centerRenderer);
         columnModel.getColumn(4).setCellRenderer(centerRenderer);
+        columnModel.getColumn(5).setCellRenderer(centerRenderer);
         tabela.getColumnModel().getColumn(0).setMaxWidth(60);
         tabela.getColumnModel().getColumn(1).setMaxWidth(100);
         tabela.getColumnModel().getColumn(1).setMinWidth(100);
         tabela.getColumnModel().getColumn(3).setMaxWidth(50);
-        tabela.getColumnModel().getColumn(4).setMaxWidth(60);
+        tabela.getColumnModel().getColumn(5).setMaxWidth(60);
     }
-    private static JButton getJButton(MenuInicial principal) {
+    private static JButton getJButton(MenuInicial principal,TabelaMedicos modeloMedico) {
         JButton botaoAdicionar = new JButton("Adicionar");
         botaoAdicionar.setBackground(Color.LIGHT_GRAY);
         botaoAdicionar.setPreferredSize(new Dimension(120, 40));
@@ -116,6 +121,7 @@ public class MenuMedicos extends JFrame {
                         principal.getSistema().addMedico(medico);
                         JOptionPane.showMessageDialog(null,
                                 "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + medico.getIdade() + "\n" + medico.getEspecialidade(), "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
+                                modeloMedico.fireTableDataChanged();
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);
                     }

@@ -222,7 +222,7 @@ public class RegistroCSV {
     }
 
     public static List<Internacao> lerInternacoes(Sistema sistema) {
-        caminho = pasta + "Medicos.csv";
+        caminho = pasta + "Internacoes.csv";
         Path path = Path.of(caminho);
         List<Internacao> internacoes = new ArrayList<>();
 

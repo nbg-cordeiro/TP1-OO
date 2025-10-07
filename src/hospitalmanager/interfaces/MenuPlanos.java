@@ -5,7 +5,8 @@ import hospitalmanager.interfaces.ModelosTabela.TabelaPlanos;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 
 public class MenuPlanos extends JFrame {
@@ -23,7 +24,6 @@ public class MenuPlanos extends JFrame {
         painelInferior.setBackground(Color.DARK_GRAY);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Planos");
         titulo.setVisible(true);
-
         TabelaPlanos modeloPlanos = new TabelaPlanos(principal.getSistema().getPlanos());
         JTable tabela = new JTable(modeloPlanos);
         tabela.setBackground(Color.lightGray);
@@ -32,14 +32,15 @@ public class MenuPlanos extends JFrame {
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
-        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        javax.swing.table.TableColumnModel columnModel = tabela.getColumnModel();
-
-        columnModel.getColumn(0).setCellRenderer(centerRenderer);
-        columnModel.getColumn(1).setCellRenderer(centerRenderer);
-        columnModel.getColumn(2).setCellRenderer(centerRenderer);
-        columnModel.getColumn(3).setCellRenderer(centerRenderer);
+        tabela.getColumnModel().getColumn(2).setHeaderRenderer(renderizadorCabecalho);
+        tabela.getColumnModel().getColumn(3).setHeaderRenderer(renderizadorCabecalho);
+        Dimension dim = tabela.getTableHeader().getPreferredSize();
+        FontMetrics metrics = tabela.getTableHeader().getFontMetrics(tabela.getTableHeader().getFont());
+        int alturaDeUmaLinha = metrics.getHeight();
+        dim.height = (alturaDeUmaLinha * 3) + 4;
+        tabela.getTableHeader().setMinimumSize(dim);
     }
     private static JButton getJButton(MenuInicial principal) {
         JButton botaoAdicionar = new JButton("Adicionar");
@@ -81,4 +82,20 @@ public class MenuPlanos extends JFrame {
         });
         return botaoAdicionar;
     }
+    TableCellRenderer renderizadorCabecalho = new TableCellRenderer() {
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            JTextArea areaTexto = new JTextArea(value.toString());
+            areaTexto.setLineWrap(true);
+            areaTexto.setWrapStyleWord(true);
+            areaTexto.setOpaque(true);
+            areaTexto.setFont(table.getTableHeader().getFont());
+            areaTexto.setForeground(table.getTableHeader().getForeground());
+            areaTexto.setBackground(table.getTableHeader().getBackground());
+            areaTexto.setBorder(UIManager.getBorder("TableHeader.cellBorder"));
+            areaTexto.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
+            areaTexto.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
+            return areaTexto;
+        }
+    };
 }

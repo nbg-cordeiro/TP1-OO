@@ -34,7 +34,7 @@ public class Internacao{
         this.leito = leito;
         this.inicio = inicio;
         this.fim = fim;
-        this.descPlano = paciente.getPlanoDeSaude().getDesInternacoes();
+        this.descPlano = (paciente.getPlanoDeSaude().getDesInternacoes())/100d;
     }
     public void setPaciente(Paciente paciente){
         this.paciente = paciente;
@@ -65,7 +65,7 @@ public class Internacao{
     }
     public Double getPreco(){
         Period duracao;
-        if(getPaciente().getIdade()>=50){
+        if(getPaciente().getIdade()>=60){
             descIdade = 0.9d;
         }
         if(getCheckOut()==null)
@@ -75,9 +75,9 @@ public class Internacao{
         else{
             duracao = Period.between(getCheckIn(),getCheckOut());
         }
-        preco=(double) 500 + (100 * duracao.getDays());
-        preco *= descIdade;
-        preco *= descPlano;
+        preco= 500d + (100d * (double)duracao.getDays());
+        preco *= (descIdade);
+        preco *= (descPlano);
         return preco;
     }
     public void finalizar(){
