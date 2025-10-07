@@ -8,7 +8,8 @@ import hospitalmanager.interfaces.elementos.PainelInferior;
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuConsultas extends JFrame {
+public class MenuConsultas extends JFrame{
+
     public MenuConsultas(JFrame passada) {
         setSize(500,500);
         setUndecorated(true);

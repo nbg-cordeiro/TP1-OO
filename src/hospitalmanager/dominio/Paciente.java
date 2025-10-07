@@ -1,21 +1,13 @@
 package hospitalmanager.dominio;
 
-import java.io.Serial;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Paciente extends Pessoa implements java.io.Serializable{
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Paciente extends Pessoa{
     List<Consulta> historicoConsultas =  new ArrayList<>();
 
     public Paciente(){
         super();
-    }
-    public Paciente(String cpf, String nome, LocalDate dataNascimento, List<Consulta> consultas, PlanoDeSaude planoDeSaude)
-    {
-        super(cpf ,nome ,dataNascimento);
-        this.historicoConsultas = consultas;
     }
     public Paciente(String cpf, String nome, LocalDate dataNascimento)
     {
@@ -37,6 +29,6 @@ public class Paciente extends Pessoa implements java.io.Serializable{
     @Override
     public String toString()
     {
-        return "-Nome: "+getNome()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();
+        return String.join(",",getCpf(),getNome(),getDataNascimento().toString());
     }
 }

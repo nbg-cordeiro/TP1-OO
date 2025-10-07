@@ -1,18 +1,13 @@
 package hospitalmanager.dominio;
 
-import java.io.Serial;
-
-public class PlanoDeSaude implements java.io.Serializable {
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class PlanoDeSaude{
 
     private String nome;
     private String codigo;
-    private String telefone;
-    private double descontoConsultas;
-    private double descontoInternacoes;
+    private Double descontoConsultas;
+    private Double descontoInternacoes;
 
-    public PlanoDeSaude(String nome, String codigo, double descontoConsultas, double descontoInternacoes) {
+    public PlanoDeSaude(String codigo, String nome, Double descontoConsultas, Double descontoInternacoes) {
         this.nome = nome;
         this.codigo = codigo;
         this.descontoConsultas = descontoConsultas;
@@ -27,16 +22,16 @@ public class PlanoDeSaude implements java.io.Serializable {
         {return codigo;}
     public void setCodigo(String codigo)
         {this.codigo = codigo;}
-    public String getTelefone()
-        {return telefone;}
-    public void setTelefone(String telefone)
-        {this.telefone = telefone;}
-    public double getDesConsultas()
+    public Double getDesConsultas()
         {return descontoConsultas;}
-    public void setDesConsultas(double descontoConsultas)
+    public void setDesConsultas(Double descontoConsultas)
         {this.descontoConsultas = descontoConsultas;}
-    public double getDesInternacoes()
+    public Double getDesInternacoes()
         {return descontoInternacoes;}
-    public void setDesInternacoes(double descontoInternacoes)
+    public void setDesInternacoes(Double descontoInternacoes)
         {this.descontoInternacoes = descontoInternacoes;}
+    @Override
+    public String toString(){
+        return String.join(",",getCodigo(),getNome(),getDesConsultas().toString(),getDesInternacoes().toString());
+    }
 }

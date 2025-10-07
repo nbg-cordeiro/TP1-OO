@@ -1,27 +1,25 @@
 package hospitalmanager.dominio;
 
-import java.io.Serial;
 import java.time.LocalDate;
 import java.util.*;
 
-public class Medico extends Pessoa implements java.io.Serializable{
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Medico extends Pessoa{
     private String crm;
+    private String especialidade;
     List<Consulta> agenda =  new ArrayList<>();
 
-    public Medico(String crm, String cpf, String nome, LocalDate dataNascimento)
+    public Medico(String crm, String cpf, String nome, LocalDate dataNascimento,String  especialidade)
     {
         super(cpf,nome,dataNascimento);
         this.crm = crm;
+        this.especialidade = especialidade;
     }
-    public Medico(String crm, String cpf, String nome, LocalDate dataNascimento, List<Consulta> consultas)
-    {
-        super(cpf,nome,dataNascimento);
-        this.crm = crm;
-        this.agenda = consultas;
+    public String getEspecialidade(){
+        return especialidade;
     }
-
+    public void setEspecialidade(String especialidade){
+        this.especialidade = especialidade;
+    }
     public void setCrm(String crm)
         {this.crm = crm;}
     public void adicionarConsulta(Consulta consulta)
@@ -37,7 +35,7 @@ public class Medico extends Pessoa implements java.io.Serializable{
     @Override
     public String toString()
     {
-        return "-Nome: "+getNome()+"\n-CRM: "+getCrm()+"\n-Idade: "+getIdade()+"\n-CPF: "+getCpf();
+        return String.join(",",getCrm(),getCpf(),getNome(),getDataNascimento().toString(),getEspecialidade());
     }
 
 }

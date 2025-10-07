@@ -1,12 +1,11 @@
 package hospitalmanager.interfaces;
 
+import hospitalmanager.dominio.PlanoDeSaude;
 import hospitalmanager.interfaces.ModelosTabela.TabelaPlanos;
-import hospitalmanager.interfaces.elementos.BotaoFechar;
-import hospitalmanager.interfaces.elementos.BotaoVoltar;
-import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.PainelInferior;
+import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 
 public class MenuPlanos extends JFrame {
@@ -39,17 +38,13 @@ public class MenuPlanos extends JFrame {
 
         columnModel.getColumn(0).setCellRenderer(centerRenderer);
         columnModel.getColumn(1).setCellRenderer(centerRenderer);
+        columnModel.getColumn(2).setCellRenderer(centerRenderer);
         columnModel.getColumn(3).setCellRenderer(centerRenderer);
-        columnModel.getColumn(4).setCellRenderer(centerRenderer);
-        tabela.getColumnModel().getColumn(0).setMaxWidth(60);
-        tabela.getColumnModel().getColumn(1).setMaxWidth(100);
-        tabela.getColumnModel().getColumn(1).setMinWidth(100);
-        tabela.getColumnModel().getColumn(3).setMaxWidth(50);
-        tabela.getColumnModel().getColumn(4).setMaxWidth(60);
     }
     private static JButton getJButton(MenuInicial principal) {
         JButton botaoAdicionar = new JButton("Adicionar");
         botaoAdicionar.setBackground(Color.LIGHT_GRAY);
+
         botaoAdicionar.setPreferredSize(new Dimension(120, 40));
         botaoAdicionar.setMaximumSize(new Dimension(120, 40));
         botaoAdicionar.setMinimumSize(new Dimension(120, 40));
@@ -57,7 +52,6 @@ public class MenuPlanos extends JFrame {
         botaoAdicionar.addActionListener(_ -> {
             JTextField campoNome = new JTextField();
             JTextField campoCodigo = new JTextField();
-            JTextField campoTelefone = new JTextField();
             JTextField campoDescInter = new JTextField();
             JTextField campoDescCons = new JTextField();
 
@@ -67,8 +61,6 @@ public class MenuPlanos extends JFrame {
             panel.add(campoCodigo);
             panel.add(new JLabel("Nome:"));
             panel.add(campoNome);
-            panel.add(new JLabel("Telefone:"));
-            panel.add(campoTelefone);
             panel.add(new JLabel("Desconto Internações (%):"));
             panel.add(campoDescInter);
             panel.add(new JLabel("Desconto Consultas (%):"));
@@ -77,7 +69,12 @@ public class MenuPlanos extends JFrame {
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Plano de Saúde",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
             if (result == JOptionPane.OK_OPTION){
-                // colocar coisas aqui depois
+                String codigo = campoCodigo.getText();
+                String nome = campoNome.getText();
+                Double descInter = Double.parseDouble(campoDescInter.getText());
+                Double descCons = Double.parseDouble(campoDescCons.getText());
+                PlanoDeSaude plano = new PlanoDeSaude(codigo,nome,descInter,descCons);
+                principal.getSistema().addPlano(plano);
             } else {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             }

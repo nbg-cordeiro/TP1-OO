@@ -1,14 +1,10 @@
 package hospitalmanager.dominio;
 
-import java.io.Serial;
 import java.time.LocalDate;
 import java.time.Period;
 
-import static java.time.LocalDate.now;
 
-public class Pessoa implements java.io.Serializable{
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Pessoa{
     private String cpf;
     private String nome;
     private LocalDate dataNascimento;
@@ -19,7 +15,9 @@ public class Pessoa implements java.io.Serializable{
         this.nome = nome;
         this.dataNascimento = dataNascimento;
     }
-
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
     public Pessoa() {
     }
 
@@ -27,8 +25,6 @@ public class Pessoa implements java.io.Serializable{
         {this.cpf = cpf;}
     public void setNome(String nome)
         {this.nome = nome;}
-    public void setDataNascimento(LocalDate dataNascimento)
-        {this.dataNascimento = dataNascimento;}
     public int getIdade() {
             if(dataNascimento==null)
             {

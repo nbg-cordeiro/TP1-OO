@@ -2,10 +2,7 @@ package hospitalmanager.interfaces;
 
 import hospitalmanager.dominio.Paciente;
 import hospitalmanager.interfaces.ModelosTabela.TabelaPacientes;
-import hospitalmanager.interfaces.elementos.BotaoFechar;
-import hospitalmanager.interfaces.elementos.BotaoVoltar;
-import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.PainelInferior;
+import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -69,7 +66,7 @@ public class MenuPacientes extends JFrame {
                 throw new RuntimeException(e);
             }
             try {
-                formatoNascimento = new MaskFormatter("DD/MM/YYYY");
+                formatoNascimento = new MaskFormatter("##/##/####");
             } catch (ParseException e) {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                 throw new RuntimeException(e);

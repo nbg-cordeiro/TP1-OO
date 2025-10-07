@@ -2,10 +2,7 @@ package hospitalmanager.interfaces;
 
 import hospitalmanager.dominio.Medico;
 import hospitalmanager.interfaces.ModelosTabela.TabelaMedicos;
-import hospitalmanager.interfaces.elementos.BotaoFechar;
-import hospitalmanager.interfaces.elementos.BotaoVoltar;
-import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.PainelInferior;
+import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -13,6 +10,7 @@ import java.awt.*;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 public class MenuMedicos extends JFrame {
     public MenuMedicos(MenuInicial principal){
@@ -79,9 +77,11 @@ public class MenuMedicos extends JFrame {
 
             JTextField campoCrm = new JTextField();
             JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
+            JFormattedTextField campoDataNascimento = new JFormattedTextField(formatoNascimento);
             JTextField campoNome = new JTextField();
 
-            JFormattedTextField campoDataNascimento = new JFormattedTextField(formatoNascimento);
+            String[] especialidadesArray = principal.getSistema().getEspecialidades().toArray(new String[0]);
+            JComboBox<String> comboBoxEspecialidades = new JComboBox<>(especialidadesArray);
 
             JPanel panel = new JPanel(new GridLayout(0, 2, 5, 5));
 
@@ -93,6 +93,8 @@ public class MenuMedicos extends JFrame {
             panel.add(campoNome);
             panel.add(new JLabel("Data de Nascimento (DD/MM/YYYY):"));
             panel.add(campoDataNascimento);
+            panel.add(new JLabel("Especialidades:"));
+            panel.add(comboBoxEspecialidades);
 
             int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Medico",
                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
@@ -101,18 +103,19 @@ public class MenuMedicos extends JFrame {
                 String dataNascimentoStr = campoDataNascimento.getText();
                 String nome = campoNome.getText();
                 String cpf = campoCpf.getText();
-                if(cpf.contains("_") || dataNascimentoStr.contains("_") || nome.isEmpty() || crm.isEmpty())
+                String especialidade = Objects.requireNonNull(comboBoxEspecialidades.getSelectedItem()).toString();
+                if(cpf.contains("_") || dataNascimentoStr.contains("_") || nome.isEmpty() || crm.isEmpty() || especialidade.isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!","Aviso",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                     LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
-                    Medico medico = new Medico(crm, cpf, nome, dataNascimento);
+                    Medico medico = new Medico(crm, cpf, nome, dataNascimento,especialidade);
                     try{
                         principal.getSistema().addMedico(medico);
                         JOptionPane.showMessageDialog(null,
-                                "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + medico.getIdade(), "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
+                                "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + medico.getIdade() + "\n" + medico.getEspecialidade(), "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);
                     }

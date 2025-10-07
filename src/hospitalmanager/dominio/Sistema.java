@@ -1,9 +1,8 @@
 package hospitalmanager.dominio;
 
-import hospitalmanager.persistencia.*;
-
-import java.time.LocalDate;
 import java.util.*;
+
+import static hospitalmanager.persistencia.RegistroCSV.*;
 
 public class Sistema {
     private static List<Paciente> pacientes =  new ArrayList<>();
@@ -11,24 +10,26 @@ public class Sistema {
     private static List<Consulta> consultas= new ArrayList<>();
     private static List<PlanoDeSaude> planos = new ArrayList<>();
     private static List<Internacao> internacoes = new ArrayList<>();
-
+    private static List<String> especialidades =  new ArrayList<>();
     public Sistema()
     {
-        pacientes = RegistroPaciente.ler();
-        medicos = RegistroMedico.ler();
-        consultas = RegistroConsulta.ler();
-        planos = RegistroPlanos.ler();
-        internacoes = RegistroInternacoes.ler();
+        especialidades = lerEspecialidades();
+        planos = lerPlanosDeSaude();
+        pacientes = lerPacientes();
+        medicos = lerMedicos();
+        internacoes = lerInternacoes(this);
+        consultas = lerConsultas(this);
     }
 
     public static void salvarTudo()
     {
         try{
-            RegistroMedico.escrever(medicos);
-            RegistroPaciente.escrever(pacientes);
-            RegistroPlanos.escrever(planos);
-            RegistroConsulta.escrever(consultas);
-            RegistroInternacoes.escrever(internacoes);
+            escreverEspecialidades(especialidades);
+            escreverPlanos(planos);
+            escreverPacientes(pacientes);
+            escreverMedicos(medicos);
+            escreverInternacoes(internacoes);
+            escreverConsultas(consultas);
             System.out.println("Dados salvos com sucesso!");
         }catch(Exception e){
             System.out.println("Erro no salvamento"+e.getMessage());
@@ -76,7 +77,11 @@ public class Sistema {
             System.out.println("Paciente cadastrado com sucesso!");
         }
     }
-    public static boolean cpfJaExiste(String cpf) {
+    public void addPlano(PlanoDeSaude plano)
+    {
+        planos.add(plano);
+    }
+    public boolean cpfJaExiste(String cpf) {
         for (Paciente paciente : pacientes){
             if (paciente.getCpf().equals(cpf)) {
                 return true;
@@ -84,9 +89,22 @@ public class Sistema {
         }
         return false;
     }
-    public static boolean crmJaExiste(String crm){
+
+    public List<String> getEspecialidades() {
+        return especialidades;
+    }
+
+    public boolean crmJaExiste(String crm){
         for (Medico medico : medicos){
             if (medico.getCrm().equals(crm)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean planoJaExiste(String crm){
+        for (PlanoDeSaude plano : planos){
+            if (plano.getCodigo().equals(crm)){
                 return true;
             }
         }

@@ -1,9 +1,7 @@
 package hospitalmanager.interfaces;
 
 import hospitalmanager.dominio.Sistema;
-import hospitalmanager.interfaces.elementos.BotaoFechar;
-import hospitalmanager.interfaces.elementos.PainelTitulo;
-import hospitalmanager.interfaces.elementos.PainelInferior;
+import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
 import java.awt.*;

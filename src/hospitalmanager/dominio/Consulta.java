@@ -1,11 +1,9 @@
 package hospitalmanager.dominio;
-import java.io.Serial;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
-public class Consulta implements java.io.Serializable{
-    @Serial
-    private static final long serialVersionUID = 1L;
+import java.time.LocalDateTime;
+
+public class Consulta{
+
     private Paciente paciente;
     private Medico medico;
     private String status = "Marcada";
@@ -13,18 +11,17 @@ public class Consulta implements java.io.Serializable{
     private String local;
     private String motivo;
 
-    public Consulta(Paciente paciente, Medico medico, String local, LocalDateTime dataHora, String motivo)
+    public Consulta(Paciente paciente, Medico medico,String status,String local, LocalDateTime dataHora, String motivo)
     {
         this.paciente = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
         this.local = local;
         this.motivo = motivo;
-        this.status = "Marcada";
+        this.status = status;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
     }
-
     public void setMotivo(String motivo)
         {this.motivo = motivo;}
     public void setDataHora(LocalDateTime dataHora)
@@ -62,8 +59,6 @@ public class Consulta implements java.io.Serializable{
 
     @Override
     public String toString() {
-        DateTimeFormatter data = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter hora = DateTimeFormatter.ofPattern("HH:mm");
-        return"Consulta dia "+ getDataHora().format(data)+" às "+getDataHora().format(hora)+".\n============= Medico =============\n"+getMedico().toString()+"============= Paciente =============\n"+getPaciente().toString()+"\n==================================\n";
+        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getStatus(),getDataHora().toString(),getLocal(),getMotivo());
     }
 }

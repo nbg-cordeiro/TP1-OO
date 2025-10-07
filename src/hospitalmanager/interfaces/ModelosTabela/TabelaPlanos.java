@@ -8,7 +8,7 @@ import java.util.List;
 public class TabelaPlanos extends AbstractTableModel {
 
     private final List<PlanoDeSaude> planos;
-    private final String[] colunas = {"Codigo", "Nome"," Telefone", "Desconto em Consultas (%)","Desconto em Internações (%)"};
+    private final String[] colunas = {"Codigo", "Nome", "Desconto em \n Consultas (%)","Desconto em \n Internações (%)"};
 
     public TabelaPlanos(List<PlanoDeSaude> planos) {
         this.planos = planos;
@@ -35,9 +35,8 @@ public class TabelaPlanos extends AbstractTableModel {
         return switch (columnIndex){
             case 0 -> plano.getCodigo();
             case 1 -> "    "+plano.getNome();
-            case 2 -> plano.getTelefone();
-            case 3 -> plano.getDesConsultas()*100 + "%";
-            case 4 -> plano.getDesInternacoes()*100+ "%";
+            case 2 -> plano.getDesConsultas();
+            case 3 -> plano.getDesInternacoes();
             default -> null;
         };
     }
@@ -52,16 +51,13 @@ public class TabelaPlanos extends AbstractTableModel {
                 plano.setNome( ((String) aValue).trim() );
                 break;
             case 2:
-                plano.setTelefone( ((String) aValue).trim() );
-                break;
-            case 3:
                 try {
                     plano.setDesConsultas( Double.parseDouble(aValue.toString()) );
                 } catch (NumberFormatException e) {
                     System.err.println("Formato invalido.");
                 }
                 break;
-            case 4:
+            case 3:
                 try {
                     plano.setDesInternacoes( Double.parseDouble(aValue.toString()) );
                 } catch (NumberFormatException e) {
@@ -72,7 +68,7 @@ public class TabelaPlanos extends AbstractTableModel {
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex == 3 || columnIndex == 4;
+        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex == 3;
     }
 }
 

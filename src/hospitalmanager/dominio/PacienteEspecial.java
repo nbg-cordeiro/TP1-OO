@@ -11,4 +11,8 @@ public class PacienteEspecial extends Paciente{
     public PlanoDeSaude getPlanoDeSaude(){
         return planoDeSaude;
     }
+    @Override
+    public String toString(){
+        return String.join(",",getCpf(),getNome(),getDataNascimento().toString(),getPlanoDeSaude().getCodigo());
+    }
 }
