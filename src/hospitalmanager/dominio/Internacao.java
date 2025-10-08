@@ -4,46 +4,56 @@ import java.time.LocalDate;
 import java.time.Period;
 
 public class Internacao{
-    private Paciente paciente;
-    private PacienteEspecial pacienteEspecial;
-    private Medico medico;
+    private final Paciente paciente;
+    private final Medico medico;
     private String leito;
-    private LocalDate inicio;
+    private final LocalDate inicio;
     private LocalDate fim=null;
     private Double descPlano = 1d;
     private Double descIdade = 1d;
-    public Internacao(Paciente paciente,Medico medico,String leito, LocalDate inicio){
+    private final String observacoes;
+    public Internacao(Paciente paciente,Medico medico,String leito, LocalDate inicio, String observacoes){
         this.paciente = paciente;
         this.leito = leito;
         this.inicio = inicio;
+        this.medico = medico;
+        this.observacoes = observacoes;
+        if(paciente instanceof PacienteEspecial){
+            if(((PacienteEspecial) paciente).getPlanoDeSaude()!=null){
+                descPlano = 1-(((PacienteEspecial) paciente).getPlanoDeSaude().getDesInternacoes()/100);
+            }
+            else{
+                descPlano = 1d;
+            }
+        }
+        paciente.adicionarInternacao(this);
     }
-    public Internacao(Paciente paciente,String leito, LocalDate inicio, LocalDate fim){
+    public Internacao(Paciente paciente,Medico medico,String leito, LocalDate inicio, LocalDate fim,String observacoes){
         this.paciente = paciente;
+        this.medico = medico;
         this.leito = leito;
         this.inicio = inicio;
         this.fim = fim;
-    }
-    public Internacao(PacienteEspecial paciente,String leito, LocalDate inicio){
-        this.pacienteEspecial = paciente;
-        this.leito = leito;
-        this.inicio = inicio;
-        this.descPlano = 1-(paciente.getPlanoDeSaude().getDesInternacoes()/100d);
-    }
-    public Internacao(PacienteEspecial paciente,String leito, LocalDate inicio, LocalDate fim){
-        this.pacienteEspecial = paciente;
-        this.leito = leito;
-        this.inicio = inicio;
-        this.fim = fim;
-        this.descPlano = 1-(paciente.getPlanoDeSaude().getDesInternacoes())/100d;
+        this.observacoes = observacoes;
+        if(paciente instanceof PacienteEspecial){
+            if(((PacienteEspecial) paciente).getPlanoDeSaude()!=null){
+                descPlano = 1-(((PacienteEspecial) paciente).getPlanoDeSaude().getDesInternacoes()/100);
+            }
+            else{
+                descPlano = 1d;
+            }
+        }
+        paciente.adicionarInternacao(this);
     }
     public void setLeito(String leito){
         this.leito = leito;
     }
-    public void setInicio(LocalDate inicio){
-        this.inicio = inicio;
+    public String getObservacoes(){
+        return observacoes;
     }
-    public void setFim(LocalDate fim){
-        this.fim = fim;
+    public String getCpf()
+    {
+        return paciente.getCpf();
     }
     public String getLeito(){
         return leito;
@@ -57,9 +67,13 @@ public class Internacao{
     public Paciente getPaciente(){
        return paciente;
     }
+    public Medico getMedico(){
+        return medico;
+    }
     public Double getPreco(){
         Period duracao;
-        if(getPaciente().getIdade()>=60){
+        if(paciente.getIdade()>=60)
+        {
             descIdade = 0.9d;
         }
         if(getCheckOut()==null)
@@ -69,7 +83,7 @@ public class Internacao{
         else{
             duracao = Period.between(getCheckIn(),getCheckOut());
         }
-        Double preco = 500d + (100d * (double) duracao.getDays());
+        Double preco = (double) 500 + (100 *  (1+duracao.getDays()));
         preco *= (descIdade);
         preco *= (descPlano);
         return preco;
@@ -79,6 +93,10 @@ public class Internacao{
     }
     @Override
     public String toString(){
-        return String.join(",",getPaciente().getNome(),getLeito(),getPreco().toString(),getCheckIn().toString(),getCheckOut().toString());
+        if(getCheckOut()==null)
+        {
+            return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getLeito(),getCheckIn().toString(),"Não",getObservacoes());
+        }
+        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getLeito(),getCheckIn().toString(),getCheckOut().toString(),getObservacoes());
     }
 }

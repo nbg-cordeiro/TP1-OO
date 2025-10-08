@@ -251,8 +251,18 @@ public class RegistroCSV {
                 LocalDateTime dataEHora = LocalDateTime.parse(colunas[3].trim());
                 String local = colunas[4].trim();
                 String motivo = colunas[5].trim();
-                Consulta consulta = new Consulta(Objects.requireNonNull(acharPaciente(cpf, sistema.getPacientes())), Objects.requireNonNull(acharMedico(crm, sistema.getMedicos())), status, local, dataEHora, motivo);
-                consultas.add(consulta);
+                if(acharPaciente(cpf,sistema.getPacientes())==null)
+                {
+                    PacienteEspecial pacienteEspecial = acharPacienteEspecial(cpf,sistema.getPacientesEspeciais());
+                    Consulta consulta = new Consulta(pacienteEspecial,acharMedico(crm, sistema.getMedicos()),status, local, dataEHora, motivo);
+                    consultas.add(consulta);
+                }
+                else{
+                    Paciente paciente = acharPaciente(cpf,sistema.getPacientes());
+                    assert paciente != null;
+                    Consulta consulta = new Consulta(paciente, acharMedico(crm, sistema.getMedicos()), "Agendada", local, dataEHora, motivo);
+                    consultas.add(consulta);
+                }
             }
             System.out.println("Consultas lidos com sucesso!");
         } catch (IOException e) {
@@ -276,11 +286,29 @@ public class RegistroCSV {
             while ((linha = leitor.readLine()) != null) {
                 String[] colunas = linha.split(",");
                 String cpf = colunas[0].trim();
-                String leito = colunas[1].trim();
-                LocalDate dataCheckIn = LocalDate.parse(colunas[2].trim());
-                LocalDate dataCheckOut = LocalDate.parse(colunas[3].trim());
-                Internacao internacao = new Internacao(Objects.requireNonNull(acharPaciente(cpf, sistema.getPacientes())), leito, dataCheckIn, dataCheckOut);
-                internacoes.add(internacao);
+                String crm = colunas[1].trim();
+                String leito = colunas[2].trim();
+                LocalDate dataCheckIn = LocalDate.parse(colunas[3].trim());
+                LocalDate dataCheckOut;
+                if(colunas[4].trim().equals("Não"))
+                {
+                     dataCheckOut = null;
+                }
+                else{
+                    dataCheckOut = LocalDate.parse(colunas[4].trim());
+                }
+                String observacoes =  colunas[5].trim();
+                if(acharPaciente(cpf,sistema.getPacientes())==null)
+                {
+                    Internacao internacao = new Internacao(acharPacienteEspecial(cpf, sistema.getPacientesEspeciais()),acharMedico(crm,sistema.getMedicos()), leito, dataCheckIn, dataCheckOut,observacoes);
+                    internacoes.add(internacao);
+                }
+                else{
+                    Paciente paciente = acharPaciente(cpf,sistema.getPacientes());
+                    assert paciente != null;
+                    Internacao internacao = new Internacao(Objects.requireNonNull(acharPaciente(cpf, sistema.getPacientes())),acharMedico(crm,sistema.getMedicos()), leito, dataCheckIn, dataCheckOut,observacoes);
+                    internacoes.add(internacao);
+                }
             }
             System.out.println("Internações lidos com sucesso!");
         } catch (IOException e) {
@@ -387,7 +415,7 @@ public class RegistroCSV {
                 return p;
             }
         }
-        return null;
+        return new PacienteEspecial(null,null,null,null);
     }
     public static PlanoDeSaude acharPlano(String codigo, List<PlanoDeSaude> planos) {
         for (PlanoDeSaude p : planos) {
