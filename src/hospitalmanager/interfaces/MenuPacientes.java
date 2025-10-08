@@ -8,7 +8,6 @@ import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -28,12 +27,49 @@ public class MenuPacientes extends JFrame {
 
         Function<Integer, Paciente> pacienteProvider = modeloPaciente::getPacienteAt;
 
-        Consumer<Paciente> verDetalhes = _ ->{
-            JPanel painel = new JPanel();
-            painel.add(new JLabel("Teste!"));
-            painel.add(new JLabel("Teste:"));
-            JOptionPane.showConfirmDialog(null, painel, "Teste",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        Consumer<Paciente> verDetalhes = paciente ->{
+            try{
+            JPanel painel = new JPanel(new BorderLayout(5, 5));
+            String[] opcoes = {"Consultas", "Internações", "Cancelar"};
+            int escolha = JOptionPane.showOptionDialog( painel,null,"Opções de Cadastro",JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,opcoes,opcoes[2]);
+            JPanel painelInfo = new JPanel(new GridLayout(0, 1));
+            painelInfo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+            painelInfo.add(new JLabel("CPF: " + paciente.getCpf()));
+            painelInfo.add(new JLabel("Nome: " + paciente.getNome()));
+            painelInfo.add(new JLabel("Idade: " + paciente.getIdade() + " anos"));
+            painel.add(painelInfo, BorderLayout.NORTH);
+            JScrollPane scrollPane;
+            String title = "Relatório de Consultas";
+            if(escolha == 1){
+                TabelaInternacoes modeloInternacoes = new TabelaInternacoes(paciente.getInternacoes());
+                JTable tabelaInternacoes = new JTable(modeloInternacoes);
+                tabelaInternacoes.setPreferredScrollableViewportSize(new Dimension(500, 250));
+                scrollPane = new JScrollPane(tabelaInternacoes);
+                title="Relatório de Internações";
+                painel.add(scrollPane, BorderLayout.CENTER);
+            }
+            else if(escolha == 0){
+                TabelaConsultas modeloConsultas = new TabelaConsultas(paciente.getConsultas());
+                JTable tabelaConsultas = new JTable(modeloConsultas);
+                tabelaConsultas.setPreferredScrollableViewportSize(new Dimension(500, 250));
+                scrollPane = new JScrollPane(tabelaConsultas);
+                painel.add(scrollPane, BorderLayout.CENTER);
+            }
+            else{
+                throw new RuntimeException();
+            }
+            JOptionPane.showMessageDialog(
+                    this,
+                    painel,
+                    title,
+                    JOptionPane.PLAIN_MESSAGE
+            );}catch(RuntimeException a){
+                JOptionPane.showMessageDialog(null, "Visualização Cancelada.");
+                System.err.println("Visualização Cancelada.");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro ao abrir visualização: "+e.getMessage());
+                System.err.println("Erro ao abrir visualização: "+e.getMessage());
+            }
         };
         new BotaoColuna<>(tabela, 3, "Ver", verDetalhes, pacienteProvider);
 
@@ -82,7 +118,6 @@ public class MenuPacientes extends JFrame {
                 scrollPane.setViewportView(tabelaEspecial);
                 tabelaEspecial.setVisible(true);
                 modeloEspecial.fireTableDataChanged();
-
                 tabela.setVisible(false);
             }
             else{

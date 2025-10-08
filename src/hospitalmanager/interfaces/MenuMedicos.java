@@ -1,6 +1,8 @@
 package hospitalmanager.interfaces;
 
+import hospitalmanager.dominio.Consulta;
 import hospitalmanager.dominio.Medico;
+import hospitalmanager.interfaces.ModelosTabela.TabelaConsultas;
 import hospitalmanager.interfaces.ModelosTabela.TabelaMedicos;
 import hospitalmanager.interfaces.elementos.*;
 
@@ -13,6 +15,8 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class MenuMedicos extends JFrame {
     public MenuMedicos(MenuInicial principal){
@@ -30,11 +34,54 @@ public class MenuMedicos extends JFrame {
 
         JTable tabela = new JTable(modeloMedico);
 
+        Function<Integer, Medico> medicoProvider = modeloMedico::getMedicoAt;
+
+        Consumer<Medico> verDetalhes = medico ->{
+            try{
+                JPanel painel = new JPanel(new BorderLayout(5, 5));
+                JPanel painelInfo = new JPanel(new GridLayout(0, 1));
+                painelInfo.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+                painelInfo.add(new JLabel("CRM: " + medico.getCrm()));
+                painelInfo.add(new JLabel("Nome: " + medico.getNome()));
+                painelInfo.add(new JLabel("Especialidade: " + medico.getEspecialidade()));
+                int consultasConcluidas=0;
+                int consultasAgendadas=0;
+                for(Consulta c:medico.getAgenda()) {
+                    if(Objects.equals(c.getStatus(), "Concluída")){
+                        consultasConcluidas++;
+                    }
+                }
+                for(Consulta c:medico.getAgenda()) {
+                    if(Objects.equals(c.getStatus(), "Agendada")){
+                        consultasAgendadas++;
+                    }
+                }
+                painelInfo.add(new JLabel("Consultas Concluídas: "+consultasConcluidas));
+                painelInfo.add(new JLabel("Consultas Agendadas: "+consultasAgendadas));
+                painel.add(painelInfo, BorderLayout.NORTH);
+                TabelaConsultas modelo = new TabelaConsultas(medico.getAgenda());
+                JTable tabelaConsultas = new JTable(modelo);
+                JScrollPane scrollPane = new JScrollPane(tabelaConsultas);
+                painel.add(scrollPane,BorderLayout.CENTER);
+                JOptionPane.showMessageDialog(
+                        this,
+                        painel,
+                        "Relatório de Consultas:",
+                        JOptionPane.PLAIN_MESSAGE
+                );}catch(RuntimeException a){
+                JOptionPane.showMessageDialog(null, "Visualização Cancelada.");
+                System.err.println("Visualização Cancelada.");
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro ao abrir visualização: "+e.getMessage());
+                System.err.println("Erro ao abrir visualização: "+e.getMessage());
+            }
+        };
+        new BotaoColuna<>(tabela, 5, "Ver", verDetalhes, medicoProvider);
+
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar,botaoAdicionar);
         painelInferior.setBackground(Color.DARK_GRAY);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Medicos");
         titulo.setVisible(true);
-
 
         tabela.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);

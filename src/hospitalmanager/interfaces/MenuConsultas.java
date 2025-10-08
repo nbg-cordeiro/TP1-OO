@@ -6,7 +6,6 @@ import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumnModel;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
@@ -43,7 +42,6 @@ public class MenuConsultas extends JFrame{
         JButton botaoAdicionar = getJButton(principal,modeloConsultas);
         DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        TableColumnModel columnModel = tabela.getColumnModel();
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Consultas");
         titulo.setVisible(true);
         BotaoFechar botaoFechar = new BotaoFechar(this);

@@ -21,7 +21,9 @@ public class Paciente extends Pessoa{
     }
     public List<Consulta> getConsultas()
         {return historicoConsultas;}
-
+    public List<Internacao> getInternacoes() {
+        return historicoInternacoes;
+    }
     @Override
     public String toString()
     {

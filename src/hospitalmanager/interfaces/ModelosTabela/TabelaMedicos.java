@@ -60,6 +60,9 @@ public class TabelaMedicos extends AbstractTableModel {
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2;
+        return columnIndex == 0 || columnIndex == 1 || columnIndex == 2 || columnIndex  == 5;
+    }
+    public Medico getMedicoAt(int row){
+        return medicos.get(row);
     }
 }

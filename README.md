@@ -138,8 +138,8 @@ O sistema deve simular o funcionamento de um hospital com cadastro de *pacientes
    -  ✔ Pacientes com 60+ anos de idade devem ter descontos diferentes.
 
 7. *Relatórios*  
-   - Pacientes cadastrados (com histórico de consultas e internações).  
-   - Médicos cadastrados (com agenda e número de consultas realizadas).  
+   - ✔ Pacientes cadastrados (com histórico de consultas e internações).  
+   - ✔ Médicos cadastrados (com agenda e número de consultas realizadas).  
    - Consultas futuras e passadas (com filtros por paciente, médico ou especialidade).  
    - Pacientes internados no momento (com tempo de internação).  
    - Estatísticas gerais (ex: médico que mais atendeu, especialidade mais procurada).  
