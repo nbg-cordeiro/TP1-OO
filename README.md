@@ -20,21 +20,25 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 ## Instruções para Compilação e Execução
 
 1. **Compilação:**  
-   [Descrever aqui como compilar o projeto. Exemplo: `javac Main.java` ou o script usado]
+   javac -d out\production\hospital-manager src\hospitalmanager\app\App.java
+   Basta colar esse comando em um terminal aberto na pasta hospital-manager (padrão do proejeto)
 
 2. **Execução:**  
-   [Descrever aqui como executar o projeto. Exemplo: `java Main` ou o script usado]
+   java -cp out\production\hospital-manager hospitalmanager.app.App
+   Esse comando também deve ser colado no mesmo lugar, mas só após a compilação
 
 3. **Estrutura de Pastas:**  
    -hospitalmanager (pasta principal do projeto)
       --app (pasta da aplicação, contém a main executável)
       --dominio (principais entidades da aplicação)
+      --interfaces (interfaces gráficas)
+         ---elementos (elementos gráficos comuns a muitos menus)
+         ---modelosTabela (modelos de tabela customizados para cada menu)
       --persistencia (entidades responsáveis pela persistencia de dados)
       --dados (onde os dados são armazenados e lidos)
 
 3. **Versão do JAVA utilizada:**  
-   `Java 24`
-
+   `jdk Java 24 `
 ---
 
 ## Vídeo de Demonstração
@@ -45,14 +49,42 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Prints da Execução
 
-1. Menu Principal:  
-   ![Inserir Print 1](caminho/do/print1.png)
+1. Menu Inicial:  
+   ![Print Menu Inicial](https://prnt.sc/yyktDuueABw4)
 
-2. Cadastro de Médico:  
-   ![Inserir Print 2](caminho/do/print2.png)
+2. Menu de Médico:  
+   ![Inserir Print 2](https://prnt.sc/GGPx_WQYc5eL)
 
-3. Relatório de ?:  
-   ![Inserir Print 3](caminho/do/print3.png)
+3. Menu Adicionar de Médicos:
+   ![Menu Adicionar de Medicos](https://prnt.sc/F86EMhmn7MAm)
+
+4. Menu Adicionar Médicos:
+   ![Menu Adicionar Medicos](https://prnt.sc/pfXWW-5TGDLx)
+
+5. Menu Adicionar Especialidades:
+   ![Menu Adicionar Especialidades](https://prnt.sc/ZA9O70W_CJcm)
+
+6. Cadastro Cancelado
+   ![Menu Cadastro Cancelado](https://prnt.sc/mIkesfODCPnD)
+   ![Menu Cadastro Cancelado](https://prnt.sc/XzB3PlP62G-N)
+
+7. Cadastro Concluido
+   ![Menu Cadastro Concluido](https://prnt.sc/sIylrdJRfh7T)
+
+8. Menu Geral
+   ![Menu Geral](https://prnt.sc/BwmfKaX0pybp)
+
+9. Cadastro Consulta
+   ![Menu Cadastro Consulta](https://prnt.sc/7ofSmtSiyG_K)
+
+10. Cadastro Paciente
+    ![Menu Cadastro Paciente](https://prnt.sc/vDXPzJe5TA3s)
+
+11. Cadastro Plano de Saúde
+   ![Menu Cadastro Plano](https://prnt.sc/m_5nK1k-b2kw)
+
+12. Menu Pacientes Especiais (Ao clicar Alternar no Menu Pacientes)
+   ![Menu Pacientes Especiais](https://prnt.sc/eu29EyA18W53)
 
 ---
 
@@ -75,35 +107,35 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 O sistema deve simular o funcionamento de um hospital com cadastro de *pacientes, médicos, especialidades, consultas e internações*.  
 
 1. *Cadastro de Pacientes*  
-   - Pacientes comuns e pacientes especiais (ex: com plano de saúde).  
-   - Cada paciente deve ter: nome, CPF, idade, histórico de consultas e internações.  
+   - ✔ Pacientes comuns e pacientes especiais (ex: com plano de saúde).  
+   - ✔ Cada paciente deve ter: nome, CPF, idade, histórico de consultas e internações.  
 
 2. *Cadastro de Médicos*  
-   - Médicos podem ter especialidades (ex: cardiologia, pediatria, ortopedia).  
-   - Cada médico deve ter: nome, CRM, especialidade, custo da consulta e agenda de horários.  
+   - ✔ Médicos podem ter especialidades (ex: cardiologia, pediatria, ortopedia).  
+   - ✔ Cada médico deve ter: nome, CRM, especialidade, custo da consulta e agenda de horários.  
 
 3. *Agendamento de Consultas*  
-   - Um paciente pode agendar uma consulta com um médico disponível.  
-   - Consultas devem registrar: paciente, médico, data/hora, local, status (agendada, concluída, cancelada).  
-   - Pacientes especiais (plano de saúde) podem ter *vantagens*, como desconto.  
-   - Duas consultas não podem estar agendadas com o mesmo médico na mesma hora, ou no mesmo local e hora
+   - ✔ Um paciente pode agendar uma consulta com um médico disponível.  
+   - ✔ Consultas devem registrar: paciente, médico, data/hora, local, status (agendada, concluída, cancelada).  
+   - ✔ Pacientes especiais (plano de saúde) podem ter *vantagens*, como desconto.  
+   - ✔ Duas consultas não podem estar agendadas com o mesmo médico na mesma hora, ou no mesmo local e hora
 
 4. *Consultas e Diagnósticos*  
    - Ao concluir uma consulta, o médico pode registrar *diagnóstico* e/ou *prescrição de medicamentos*.  
-   - Cada consulta deve ser registrada no *histórico do paciente*.  
+   - ✔ Cada consulta deve ser registrada no *histórico do paciente*.  
 
 5. *Internações*  
-   - Pacientes podem ser internados.  
-   - Registrar: paciente, médico responsável, data de entrada, data de saída (se já liberado), quarto e custo da internação.  
-   - Deve existir controle de *ocupação dos quartos* (não permitir duas internações no mesmo quarto simultaneamente).  
+   - ✔ Pacientes podem ser internados.  
+   - ✔ Registrar: paciente, médico responsável, data de entrada, data de saída (se já liberado), quarto e custo da internação.  
+   - ✔ Deve existir controle de *ocupação dos quartos* (não permitir duas internações no mesmo quarto simultaneamente).  
    - Internações devem poder ser canceladas, quando isso ocorrer, o sistema deve ser atualizado automaticamente.
 
 6. *Planos de saúde*    
-   -  Planos de saude podem ser cadastrados.
+   -  ✔ Planos de saude podem ser cadastrados.
    -  Cada plano pode oferecer *descontos* para *especializações* diferentes, com possibilidade de descontos variados.
-   -  Um paciente que tenha o plano de saúde deve ter o desconto aplicado.
+   -  ✔ Um paciente que tenha o plano de saúde deve ter o desconto aplicado.
    -  Deve existir a possibilidade de um plano *especial* que torna internação de menos de uma semana de duração gratuita.
-   -  Pacientes com 60+ anos de idade devem ter descontos diferentes.
+   -  ✔ Pacientes com 60+ anos de idade devem ter descontos diferentes.
 
 7. *Relatórios*  
    - Pacientes cadastrados (com histórico de consultas e internações).  

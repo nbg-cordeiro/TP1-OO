@@ -220,7 +220,8 @@ public class RegistroCSV {
                 String nome = colunas[2].trim();
                 LocalDate nascimento = LocalDate.parse(colunas[3].trim());
                 String especialidade = colunas[4].trim();
-                Medico medico = new Medico(crm, cpf, nome, nascimento, especialidade);
+                double custoConsulta = Double.parseDouble(colunas[5].trim());
+                Medico medico = new Medico(crm, cpf, nome, nascimento, especialidade,custoConsulta);
                 medicos.add(medico);
             }
             System.out.println("Medicos lidos com sucesso!");
@@ -402,6 +403,6 @@ public class RegistroCSV {
                 return m;
             }
         }
-        return new Medico(null, null, null, null, null);
+        return new Medico(null, null, null, null, null,0d);
     }
 }

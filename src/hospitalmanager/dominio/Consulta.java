@@ -14,7 +14,6 @@ public class Consulta{
     private final String motivo;
     private double descPlano = 1d;
     private double descIdade = 1d;
-    private double incrementoEspecialidade = 1d;
     public Consulta(Paciente paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
     {
         this.paciente = paciente;
@@ -25,10 +24,6 @@ public class Consulta{
         this.status = status;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
-        if(!Objects.equals(medico.getEspecialidade(), "Nenhum"))
-        {
-            incrementoEspecialidade = 1.2;
-        }
     }
     public Consulta(PacienteEspecial paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
     {
@@ -41,10 +36,6 @@ public class Consulta{
         descPlano = 1-(paciente.getPlanoDeSaude().getDesConsultas())/100d;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
-        if(!Objects.equals(medico.getEspecialidade(), "Nenhum"))
-        {
-            incrementoEspecialidade = 1.2;
-        }
     }
     public String getCpf()
     {
@@ -63,8 +54,7 @@ public class Consulta{
                 {
                     descIdade = 0.9d;
                 }
-
-            return ((200*incrementoEspecialidade)*descIdade)*descPlano;
+            return medico.getCustoConsulta()*descIdade*descPlano;
         }
     public String getMotivo()
         {return motivo;}

@@ -69,8 +69,14 @@ public class Sistema {
     }
     public void addConsulta(Consulta consulta)
     {
-        consultas.add(consulta);
+        if(salaEstaOcupada(consulta)){
+            throw new RuntimeException("Sala ocupada nesse horário!");
+        }
+        else{
+            consultas.add(consulta);
+        }
     }
+
     public void addPaciente(Paciente paciente)
     {
         if(cpfJaExiste(paciente.getCpf()))
@@ -81,6 +87,14 @@ public class Sistema {
         else{
             pacientes.add(paciente);
             System.out.println("Paciente cadastrado com sucesso!");
+        }
+    }
+    public void addInternacao(Internacao internacao) {
+        if(salaEstaOcupada(internacao)){
+            throw new RuntimeException("Este leito está ocupado no momento!");
+        }
+        else{
+            internacoes.add(internacao);
         }
     }
     public void addPacienteEspecial(PacienteEspecial pacienteEspecial)
@@ -99,7 +113,7 @@ public class Sistema {
     {
         planos.add(plano);
     }
-    public boolean cpfJaExiste(String cpf) {
+    private boolean cpfJaExiste(String cpf) {
         for (Paciente paciente : pacientes){
             if (paciente.getCpf().equals(cpf)) {
                 return true;
@@ -112,7 +126,7 @@ public class Sistema {
         return especialidades;
     }
 
-    public boolean crmJaExiste(String crm){
+    private boolean crmJaExiste(String crm){
         for (Medico medico : medicos){
             if (medico.getCrm().equals(crm)){
                 return true;
@@ -120,4 +134,23 @@ public class Sistema {
         }
         return false;
     }
+    private boolean salaEstaOcupada(Consulta consulta){
+        for(Consulta cons: consultas){
+            if(cons.getSala().equals(consulta.getSala())){
+                if(cons.getDataHora().equals(consulta.getDataHora())){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean salaEstaOcupada(Internacao internacao){
+        for(Internacao intern: internacoes){
+            if(intern.getCheckOut()==null && internacao.getCheckOut()==null && intern.getLeito().equals(internacao.getLeito())){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

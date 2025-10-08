@@ -103,6 +103,7 @@ public class MenuMedicos extends JFrame {
                 JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
                 JFormattedTextField campoDataNascimento = new JFormattedTextField(formatoNascimento);
                 JTextField campoNome = new JTextField();
+                JTextField campoCusto = new JTextField();
 
                 String[] especialidadesArray = new String[principal.getSistema().getEspecialidades().size() + 1];
                 especialidadesArray[0] = "Nenhum";
@@ -123,6 +124,8 @@ public class MenuMedicos extends JFrame {
                 panel.add(campoDataNascimento);
                 panel.add(new JLabel("Especialidades:"));
                 panel.add(comboBoxEspecialidades);
+                panel.add(new JLabel("Custo:"));
+                panel.add(campoCusto);
                 int result = JOptionPane.showConfirmDialog(null, panel, "Cadastro de Medico",
                         JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
                 if (result == JOptionPane.OK_OPTION){
@@ -131,21 +134,22 @@ public class MenuMedicos extends JFrame {
                     String nome = campoNome.getText();
                     String cpf = campoCpf.getText();
                     String especialidade = Objects.requireNonNull(comboBoxEspecialidades.getSelectedItem()).toString();
-                    if(cpf.contains("_") || dataNascimentoStr.contains("_") || nome.isEmpty() || crm.isEmpty() || especialidade.isEmpty())
+                    if(campoCusto.getText().isEmpty() || cpf.contains("_") || dataNascimentoStr.contains("_") || nome.isEmpty() || crm.isEmpty() || especialidade.isEmpty())
                     {
                         JOptionPane.showMessageDialog(null, "Você deve preencher todos os campos!\n Cadastro cancelado!","Aviso",JOptionPane.INFORMATION_MESSAGE);
                     }
                     else{
+                        Double custoConsulta =  Double.parseDouble(campoCusto.getText());
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         LocalDate dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
-                        Medico medico = new Medico(crm, cpf, nome, dataNascimento,especialidade);
+                        Medico medico = new Medico(crm, cpf, nome, dataNascimento,especialidade,custoConsulta);
                         try{
                             if(dataNascimento.isAfter(LocalDate.now())){
                                 throw new Exception("Data de nascimento invalida!");
                             }
                             principal.getSistema().addMedico(medico);
                             JOptionPane.showMessageDialog(null,
-                                    "Medico Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\n" + "Idade: " + medico.getIdade() + "\n" + medico.getEspecialidade(), "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
+                                    "Medico Cadastrado com Sucesso!\n" + "\nCPF: " + cpf + "\nNome: " + nome + "\nIdade: " + medico.getIdade() + "\nEspecialidade: " + medico.getEspecialidade() + "Custo da Consulta: "+custoConsulta, "Dados do Medico", JOptionPane.INFORMATION_MESSAGE);
                             modeloMedico.fireTableDataChanged();
                         }catch(Exception e){
                             JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage(),"Aviso",JOptionPane.INFORMATION_MESSAGE);

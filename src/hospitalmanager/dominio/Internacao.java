@@ -6,13 +6,13 @@ import java.time.Period;
 public class Internacao{
     private Paciente paciente;
     private PacienteEspecial pacienteEspecial;
+    private Medico medico;
     private String leito;
     private LocalDate inicio;
     private LocalDate fim=null;
-    private Double preco;
     private Double descPlano = 1d;
     private Double descIdade = 1d;
-    public Internacao(Paciente paciente,String leito, LocalDate inicio){
+    public Internacao(Paciente paciente,Medico medico,String leito, LocalDate inicio){
         this.paciente = paciente;
         this.leito = leito;
         this.inicio = inicio;
@@ -27,17 +27,14 @@ public class Internacao{
         this.pacienteEspecial = paciente;
         this.leito = leito;
         this.inicio = inicio;
-        this.descPlano = paciente.getPlanoDeSaude().getDesInternacoes();
+        this.descPlano = 1-(paciente.getPlanoDeSaude().getDesInternacoes()/100d);
     }
     public Internacao(PacienteEspecial paciente,String leito, LocalDate inicio, LocalDate fim){
         this.pacienteEspecial = paciente;
         this.leito = leito;
         this.inicio = inicio;
         this.fim = fim;
-        this.descPlano = (paciente.getPlanoDeSaude().getDesInternacoes())/100d;
-    }
-    public void setPaciente(Paciente paciente){
-        this.paciente = paciente;
+        this.descPlano = 1-(paciente.getPlanoDeSaude().getDesInternacoes())/100d;
     }
     public void setLeito(String leito){
         this.leito = leito;
@@ -47,9 +44,6 @@ public class Internacao{
     }
     public void setFim(LocalDate fim){
         this.fim = fim;
-    }
-    public void setPreco(Double preco){
-        this.preco = preco;
     }
     public String getLeito(){
         return leito;
@@ -75,12 +69,12 @@ public class Internacao{
         else{
             duracao = Period.between(getCheckIn(),getCheckOut());
         }
-        preco= 500d + (100d * (double)duracao.getDays());
+        Double preco = 500d + (100d * (double) duracao.getDays());
         preco *= (descIdade);
         preco *= (descPlano);
         return preco;
     }
-    public void finalizar(){
+    public void fazerCheckOut(){
         fim =  LocalDate.now();
     }
     @Override
