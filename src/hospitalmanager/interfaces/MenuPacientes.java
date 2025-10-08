@@ -8,9 +8,12 @@ import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class MenuPacientes extends JFrame {
     public MenuPacientes(MenuInicial principal){
@@ -22,6 +25,18 @@ public class MenuPacientes extends JFrame {
         TabelaPacientes modeloPaciente = new TabelaPacientes(principal.getSistema().getPacientes());
         TabelaPacientesEspeciais modeloEspecial = new TabelaPacientesEspeciais(principal.getSistema().getPacientesEspeciais());
         JTable tabela = new JTable(modeloPaciente);
+
+        Function<Integer, Paciente> pacienteProvider = modeloPaciente::getPacienteAt;
+
+        Consumer<Paciente> verDetalhes = _ ->{
+            JPanel painel = new JPanel();
+            painel.add(new JLabel("Teste!"));
+            painel.add(new JLabel("Teste:"));
+            JOptionPane.showConfirmDialog(null, painel, "Teste",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        };
+        new BotaoColuna<>(tabela, 3, "Ver", verDetalhes, pacienteProvider);
+
         JTable tabelaEspecial = new JTable(modeloEspecial);
         JButton botaoAdicionar = getJButton(principal, modeloEspecial,modeloPaciente);
         BotaoFechar botaoFechar = new BotaoFechar(this);

@@ -55,7 +55,11 @@ public class TabelaPacientes extends AbstractTableModel {
     }
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0 || columnIndex == 1;
+        return columnIndex == 0 || columnIndex == 1 || columnIndex == 3;
+    }
+
+    public Paciente getPacienteAt(int row){
+        return pacientes.get(row);
     }
 }
 
