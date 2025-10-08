@@ -55,5 +55,8 @@ public class TabelaInternacoes extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex == 0 || columnIndex == 6;
     }
+    public Internacao getInternacaoAt(int row){
+        return internacoes.get(row);
+    }
 }
 

@@ -42,6 +42,7 @@ public class MenuPacientes extends JFrame {
             String title = "Relatório de Consultas";
             if(escolha == 1){
                 TabelaInternacoes modeloInternacoes = new TabelaInternacoes(paciente.getInternacoes());
+
                 JTable tabelaInternacoes = new JTable(modeloInternacoes);
                 tabelaInternacoes.setPreferredScrollableViewportSize(new Dimension(500, 250));
                 scrollPane = new JScrollPane(tabelaInternacoes);
@@ -125,7 +126,9 @@ public class MenuPacientes extends JFrame {
                 tabela.setVisible(true);
                 modeloPaciente.fireTableDataChanged();
                 tabelaEspecial.setVisible(false);
+
             }
+
         });
 
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar, botaoAdicionar, botaoAlternar);

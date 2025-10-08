@@ -50,7 +50,6 @@ public class RegistroCSV {
             System.err.println("Erro ao escrever em " + caminho + ": " + e.getMessage());
         }
     }
-
     public static void escreverPacientesEspeciais(List<PacienteEspecial> pacientesEspeciais) {
         caminho = pasta + "PacientesEspeciais.csv";
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(caminho), StandardCharsets.UTF_8)) {
@@ -285,7 +284,7 @@ public class RegistroCSV {
             String linha;
             while ((linha = leitor.readLine()) != null) {
                 String[] colunas = linha.split(",");
-                if (colunas.length < 5) {
+                if (colunas.length < 6) {
                     System.err.println("Aviso: Linha mal formatada no Internacoes.csv e será ignorada: " + linha);
                     continue;
                 }
@@ -436,5 +435,18 @@ public class RegistroCSV {
             }
         }
         return new Medico(null, null, null, null, null,0d);
+    }
+    public static String escreverRelatorio(String titulo,String texto){
+        titulo = titulo.replaceAll(" ","_");
+        titulo = titulo.replace(".","");
+        titulo = titulo.replace("-","");
+        String nomeArquivo= "Relatório_"+titulo+".csv";
+        caminho = pasta +"relatorios/"+nomeArquivo;
+        try (BufferedWriter writer = Files.newBufferedWriter(Path.of(caminho), StandardCharsets.UTF_8)) {
+            writer.write(texto);
+        } catch (IOException e) {
+            System.err.println("Erro ao escrever em " + caminho + ": " + e.getMessage());
+        }
+        return caminho;
     }
 }
