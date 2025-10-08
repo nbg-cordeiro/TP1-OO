@@ -50,41 +50,37 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 ## Prints da Execução
 
 1. Menu Inicial:  
-   ![Print Menu Inicial](https://prnt.sc/yyktDuueABw4)
+   ![Print Menu Inicial](https://prnt.sc/W56mpDrG_lrJ)
 
-2. Menu de Médico:  
-   ![Inserir Print 2](https://prnt.sc/GGPx_WQYc5eL)
+2. Menu Médico:  
+   ![Menu Médico](https://prnt.sc/ORrwW9O989B-)
+   ![Opções de Cadastro](https://prnt.sc/bGu-0aJ57Q_u)
+   ![Cadastro Médico](https://prnt.sc/6oNoNWe0KsJX)
+   ![Cadastro Especialidade](https://prnt.sc/WYuqGf8HC-cF)
+   ![Relatório "Ver"](https://prnt.sc/CLMzxH-6zpzM)
 
-3. Menu Adicionar de Médicos:
-   ![Menu Adicionar de Medicos](https://prnt.sc/F86EMhmn7MAm)
+3. Menu Paciente:
+   ![Menu Paciente](https://prnt.sc/2TOw78h635j4)
+   ![Cadastro Paciente](https://prnt.sc/I0RKm5xo7ths)
+   ![Menu PacienteEspecial (Apertando o botão alternar)](https://prnt.sc/NfkbNv-yyIyF)
+   ![Opções de Relatório "Ver"](https://prnt.sc/U7zZG0ACp35F)
+   ![Relatório Internações](https://prnt.sc/nAKom-vEAKXm)
+   ![Relatório Consultas](https://prnt.sc/w1SoKehtfvOT)
 
-4. Menu Adicionar Médicos:
-   ![Menu Adicionar Medicos](https://prnt.sc/pfXWW-5TGDLx)
-
-5. Menu Adicionar Especialidades:
-   ![Menu Adicionar Especialidades](https://prnt.sc/ZA9O70W_CJcm)
-
-6. Cadastro Cancelado
-   ![Menu Cadastro Cancelado](https://prnt.sc/mIkesfODCPnD)
-   ![Menu Cadastro Cancelado](https://prnt.sc/XzB3PlP62G-N)
-
-7. Cadastro Concluido
-   ![Menu Cadastro Concluido](https://prnt.sc/sIylrdJRfh7T)
-
-8. Menu Geral
+4. Menu Geral
    ![Menu Geral](https://prnt.sc/BwmfKaX0pybp)
 
-9. Cadastro Consulta
-   ![Menu Cadastro Consulta](https://prnt.sc/7ofSmtSiyG_K)
+5. Menu Consulta
+   ![Menu Consulta](https://prnt.sc/5k9o67XDSPiL)
+   ![Cadastro Consulta](https://prnt.sc/Vf4pVJbL72za)
 
-10. Cadastro Paciente
-    ![Menu Cadastro Paciente](https://prnt.sc/vDXPzJe5TA3s)
+6. Menu Internações
+   ![Menu Internações](https://prnt.sc/Ao6U0uLiyRlp)
+   ![Cadastro Internação](https://prnt.sc/ZBIqcwfiGB08)
 
-11. Cadastro Plano de Saúde
-   ![Menu Cadastro Plano](https://prnt.sc/m_5nK1k-b2kw)
-
-12. Menu Pacientes Especiais (Ao clicar Alternar no Menu Pacientes)
-   ![Menu Pacientes Especiais](https://prnt.sc/eu29EyA18W53)
+7. Cadastro Plano de Saúde
+   ![Menu Plano de Saúde](https://prnt.sc/I0_wS9VFxsJE)
+   ![Cadastro Plano de Saúde](https://prnt.sc/WwOqiMLHjgOE)
 
 ---
 
@@ -92,7 +88,13 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Observações (Extras ou Dificuldades)
 
-- [Espaço para o aluno comentar qualquer funcionalidade extra que implementou, dificuldades enfrentadas, ou considerações importantes.]
+- Trabalhar com a biblioteca Swing foi, definitivamente, a parte mais complicada do trabalho.
+- Embora seja uma biblioteca com muitas classes e métodos úteis, entender o que eu precisava usar
+- foi e como usar foi um desafio enorme. Eu achei que a implementação de uma interface gráfica 
+- desse tipo fosse dificultar um pouquinho o trabalho **como fui tolo!** algo que seria um simples
+- System.out.println() se tornou facilmente 1 hora de trabalho. A estrutura de menus funciona como
+- um conjunto, para terminar uma função, precisava terminar outras 5.
+- Ao menos aprendi como fazer interfaces gráficas customizadas!
 
 ---
 
@@ -107,44 +109,43 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 O sistema deve simular o funcionamento de um hospital com cadastro de *pacientes, médicos, especialidades, consultas e internações*.  
 
 1. *Cadastro de Pacientes*  
-   - ✔ Pacientes comuns e pacientes especiais (ex: com plano de saúde).  
-   - ✔ Cada paciente deve ter: nome, CPF, idade, histórico de consultas e internações.  
+   - Pacientes comuns e pacientes especiais (ex: com plano de saúde).  
+   - Cada paciente deve ter: nome, CPF, idade, histórico de consultas e internações.  
 
 2. *Cadastro de Médicos*  
-   - ✔ Médicos podem ter especialidades (ex: cardiologia, pediatria, ortopedia).  
-   - ✔ Cada médico deve ter: nome, CRM, especialidade, custo da consulta e agenda de horários.  
+   - Médicos podem ter especialidades (ex: cardiologia, pediatria, ortopedia).  
+   - Cada médico deve ter: nome, CRM, especialidade, custo da consulta e agenda de horários.  
 
 3. *Agendamento de Consultas*  
-   - ✔ Um paciente pode agendar uma consulta com um médico disponível.  
-   - ✔ Consultas devem registrar: paciente, médico, data/hora, local, status (agendada, concluída, cancelada).  
-   - ✔ Pacientes especiais (plano de saúde) podem ter *vantagens*, como desconto.  
-   - ✔ Duas consultas não podem estar agendadas com o mesmo médico na mesma hora, ou no mesmo local e hora
+   - Um paciente pode agendar uma consulta com um médico disponível.  
+   - Consultas devem registrar: paciente, médico, data/hora, local, status (agendada, concluída, cancelada).  
+   - Pacientes especiais (plano de saúde) podem ter *vantagens*, como desconto.  
+   - Duas consultas não podem estar agendadas com o mesmo médico na mesma hora, ou no mesmo local e hora
 
 4. *Consultas e Diagnósticos*  
    - Ao concluir uma consulta, o médico pode registrar *diagnóstico* e/ou *prescrição de medicamentos*.  
-   - ✔ Cada consulta deve ser registrada no *histórico do paciente*.  
+   - Cada consulta deve ser registrada no *histórico do paciente*.  
 
 5. *Internações*  
-   - ✔ Pacientes podem ser internados.  
-   - ✔ Registrar: paciente, médico responsável, data de entrada, data de saída (se já liberado), quarto e custo da internação.  
-   - ✔ Deve existir controle de *ocupação dos quartos* (não permitir duas internações no mesmo quarto simultaneamente).  
+   - Pacientes podem ser internados.  
+   - Registrar: paciente, médico responsável, data de entrada, data de saída (se já liberado), quarto e custo da internação.  
+   - Deve existir controle de *ocupação dos quartos* (não permitir duas internações no mesmo quarto simultaneamente).  
    - Internações devem poder ser canceladas, quando isso ocorrer, o sistema deve ser atualizado automaticamente.
 
 6. *Planos de saúde*    
-   -  ✔ Planos de saude podem ser cadastrados.
+   -  Planos de saude podem ser cadastrados.
    -  Cada plano pode oferecer *descontos* para *especializações* diferentes, com possibilidade de descontos variados.
-   -  ✔ Um paciente que tenha o plano de saúde deve ter o desconto aplicado.
+   -  Um paciente que tenha o plano de saúde deve ter o desconto aplicado.
    -  Deve existir a possibilidade de um plano *especial* que torna internação de menos de uma semana de duração gratuita.
-   -  ✔ Pacientes com 60+ anos de idade devem ter descontos diferentes.
+   -  Pacientes com 60+ anos de idade devem ter descontos diferentes.
 
 7. *Relatórios*  
-   - ✔ Pacientes cadastrados (com histórico de consultas e internações).  
-   - ✔ Médicos cadastrados (com agenda e número de consultas realizadas).  
+   - Pacientes cadastrados (com histórico de consultas e internações).  
+   - Médicos cadastrados (com agenda e número de consultas realizadas).  
    - Consultas futuras e passadas (com filtros por paciente, médico ou especialidade).  
    - Pacientes internados no momento (com tempo de internação).  
    - Estatísticas gerais (ex: médico que mais atendeu, especialidade mais procurada).  
-   - Quantidade de pessoas em um determinado plano de saúde e quanto aquele plano *economizou* das pessoas que o usam.  
-
+   - Quantidade de pessoas em um determinado plano de saúde e quanto aquele plano *economizou* das pessoas que o usam.
 
 ---
 

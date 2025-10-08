@@ -285,6 +285,10 @@ public class RegistroCSV {
             String linha;
             while ((linha = leitor.readLine()) != null) {
                 String[] colunas = linha.split(",");
+                if (colunas.length < 5) {
+                    System.err.println("Aviso: Linha mal formatada no Internacoes.csv e será ignorada: " + linha);
+                    continue;
+                }
                 String cpf = colunas[0].trim();
                 String crm = colunas[1].trim();
                 String leito = colunas[2].trim();
