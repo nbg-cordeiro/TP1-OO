@@ -95,7 +95,7 @@ public class MenuInternacoes extends JFrame{
                                 ,
                                 "Relatório da Internação:", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null,opcoes2,opcoes[0]);
                                 if(escolha2==1) {
-                                    String caminho = escreverRelatorio("Internacao_"+internacao.getCpf()+"_"+internacao.getLeito(),texto);
+                                    String caminho = escreverRelatorio("internacoes/Internacao_Cpf"+internacao.getCpf()+"_leito"+internacao.getLeito(),texto);
                                     JOptionPane.showMessageDialog(null, "Relatório Salvo em:\n"+caminho);
                                 }
                         break;

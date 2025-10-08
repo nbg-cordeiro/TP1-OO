@@ -10,16 +10,16 @@ public class Consulta{
     private String status;
     private final LocalDateTime dataHora;
     private String sala;
-    private final String motivo;
+    private String observacoes;
     private double descPlano= 1d;
     private double descIdade = 1d;
-    public Consulta(Paciente paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
+    public Consulta(Paciente paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String observacoes)
     {
         this.paciente = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
         this.sala = sala;
-        this.motivo = motivo;
+        this.observacoes = observacoes;
         this.status = status;
         if (paciente instanceof PacienteEspecial){
             if(((PacienteEspecial) paciente).getPlanoDeSaude()!=null){
@@ -44,8 +44,12 @@ public class Consulta{
                 }
             return (medico.getCustoConsulta()*descIdade)*descPlano;
         }
-    public String getMotivo()
-        {return motivo;}
+    public void concluirConsulta(String observacoesExtras){
+        observacoes += observacoesExtras;
+        status = "Concluída";
+    }
+    public String getObservacoes()
+        {return observacoes;}
     public Paciente getPaciente()
         {return paciente;}
     public Medico getMedico()
@@ -57,13 +61,16 @@ public class Consulta{
                 status = "Concluída";
             }
             return status;}
+    public void cancelarConsulta(){
+        status="Cancelada";
+    }
     public String getSala()
         {return sala;}
     public LocalDateTime getDataHora()
         {return dataHora;}
     @Override
     public String toString() {
-        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getStatus(),getDataHora().toString(),getSala(),getMotivo());
+        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getStatus(),getDataHora().toString(),getSala(), getObservacoes());
     }
 
 }

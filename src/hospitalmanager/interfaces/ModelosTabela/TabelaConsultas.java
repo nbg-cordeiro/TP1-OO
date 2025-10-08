@@ -59,5 +59,8 @@ public class TabelaConsultas extends AbstractTableModel {
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return columnIndex == 0 || columnIndex == 2 || columnIndex == 5;
     }
+    public Consulta getConsultaAt(int row){
+        return consultas.get(row);
+    }
 }
 
