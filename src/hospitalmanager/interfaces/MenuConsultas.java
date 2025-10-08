@@ -25,11 +25,7 @@ public class MenuConsultas extends JFrame{
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         TabelaConsultas modeloConsultas = new TabelaConsultas(principal.getSistema().getConsultas());
-        JTable tabela = new JTable(modeloConsultas);
-
-
-
-
+        JTable tabelaConsultas = new JTable(modeloConsultas);
 
         Function<Integer, Consulta> consultaProvider = modeloConsultas::getConsultaAt;
         Consumer<Consulta> verDetalhes100 = consulta ->{
@@ -113,27 +109,23 @@ public class MenuConsultas extends JFrame{
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             }
         };
-        new BotaoColuna<>(tabela, 5, "Ver", verDetalhes100, consultaProvider);
+        new BotaoColuna<>(tabelaConsultas, 5, "Ver", verDetalhes100, consultaProvider);
 
-
-
-
-
-        tabela.setBackground(Color.lightGray);
-        JScrollPane scrollPane = new JScrollPane(tabela);
+        tabelaConsultas.setBackground(Color.lightGray);
+        JScrollPane scrollPane = new JScrollPane(tabelaConsultas);
         scrollPane.setBackground(Color.gray);
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
-        tabela.getColumnModel().getColumn(5).setMaxWidth(55);
-        tabela.getColumnModel().getColumn(5).setMinWidth(55);
-        tabela.getColumnModel().getColumn(4).setMaxWidth(100);
-        tabela.getColumnModel().getColumn(4).setMinWidth(100);
-        tabela.getColumnModel().getColumn(3).setMaxWidth(70);
-        tabela.getColumnModel().getColumn(3).setMinWidth(70);
-        tabela.getColumnModel().getColumn(2).setMaxWidth(60);
-        tabela.getColumnModel().getColumn(2).setMinWidth(60);
-        tabela.getColumnModel().getColumn(1).setMaxWidth(80);
-        tabela.getColumnModel().getColumn(1).setMinWidth(80);
+        tabelaConsultas.getColumnModel().getColumn(5).setMaxWidth(55);
+        tabelaConsultas.getColumnModel().getColumn(5).setMinWidth(55);
+        tabelaConsultas.getColumnModel().getColumn(4).setMaxWidth(100);
+        tabelaConsultas.getColumnModel().getColumn(4).setMinWidth(100);
+        tabelaConsultas.getColumnModel().getColumn(3).setMaxWidth(70);
+        tabelaConsultas.getColumnModel().getColumn(3).setMinWidth(70);
+        tabelaConsultas.getColumnModel().getColumn(2).setMaxWidth(60);
+        tabelaConsultas.getColumnModel().getColumn(2).setMinWidth(60);
+        tabelaConsultas.getColumnModel().getColumn(1).setMaxWidth(80);
+        tabelaConsultas.getColumnModel().getColumn(1).setMinWidth(80);
         JButton botaoAdicionar = getJButton(principal,modeloConsultas);
         DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);

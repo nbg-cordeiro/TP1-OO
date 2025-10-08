@@ -53,11 +53,14 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    ![Print Menu Inicial](https://prnt.sc/W56mpDrG_lrJ)
 
 2. Menu Médico:  
-   ![Menu Médico](https://prnt.sc/ORrwW9O989B-)
-   ![Opções de Cadastro](https://prnt.sc/bGu-0aJ57Q_u)
-   ![Cadastro Médico](https://prnt.sc/6oNoNWe0KsJX)
-   ![Cadastro Especialidade](https://prnt.sc/WYuqGf8HC-cF)
-   ![Relatório "Ver"](https://prnt.sc/CLMzxH-6zpzM)
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
+   ![Menu Médico]()
 
 3. Menu Paciente:
    ![Menu Paciente](https://prnt.sc/2TOw78h635j4)

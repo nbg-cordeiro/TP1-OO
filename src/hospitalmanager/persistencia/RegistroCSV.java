@@ -440,7 +440,7 @@ public class RegistroCSV {
         titulo = titulo.replaceAll(" ","_");
         titulo = titulo.replace(".","");
         titulo = titulo.replace("-","");
-        String nomeArquivo= "Relatório_"+titulo+".csv";
+        String nomeArquivo= titulo+".csv";
         caminho = pasta +"relatorios/"+nomeArquivo;
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(caminho), StandardCharsets.UTF_8)) {
             writer.write(texto);
