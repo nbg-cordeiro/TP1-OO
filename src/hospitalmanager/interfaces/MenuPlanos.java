@@ -32,10 +32,14 @@ public class MenuPlanos extends JFrame {
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
+
         DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         tabela.getColumnModel().getColumn(2).setHeaderRenderer(renderizadorCabecalho);
         tabela.getColumnModel().getColumn(3).setHeaderRenderer(renderizadorCabecalho);
+        for(int i = 0; i < tabela.getColumnModel().getColumnCount(); i++){
+            tabela.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
+        }
         Dimension dim = tabela.getTableHeader().getPreferredSize();
         FontMetrics metrics = tabela.getTableHeader().getFontMetrics(tabela.getTableHeader().getFont());
         int alturaDeUmaLinha = metrics.getHeight();

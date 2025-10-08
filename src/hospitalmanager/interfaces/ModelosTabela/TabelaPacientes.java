@@ -34,7 +34,7 @@ public class TabelaPacientes extends AbstractTableModel {
         Paciente paciente = pacientes.get(rowIndex);
         return switch (columnIndex){
             case 0 -> paciente.getCpf();
-            case 1 -> "    "+paciente.getNome();
+            case 1 -> paciente.getNome();
             case 2 -> paciente.getIdade();
             case 3 -> "Ver";
             default -> null;

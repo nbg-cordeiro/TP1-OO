@@ -39,7 +39,7 @@ public class TabelaInternacoes extends AbstractTableModel {
             case 3 -> internacao.getCheckIn();
             case 4 -> internacao.getCheckOut();
             case 5 -> internacao.getPreco();
-            case 6 -> "Opções";
+            case 6 -> "Ver";
             default -> null;
         };
     }

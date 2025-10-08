@@ -38,7 +38,7 @@ public class TabelaConsultas extends AbstractTableModel {
             case 2 -> consulta.getSala();
             case 3 -> consulta.getMedico().getCrm();
             case 4 -> consulta.getCpf();
-            case 5 -> "opções";
+            case 5 -> "Ver";
             default -> null;
         };
     }

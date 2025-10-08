@@ -5,6 +5,8 @@ import hospitalmanager.interfaces.ModelosTabela.TabelaConsultas;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
@@ -39,7 +41,9 @@ public class MenuConsultas extends JFrame{
         tabela.getColumnModel().getColumn(1).setMaxWidth(80);
         tabela.getColumnModel().getColumn(1).setMinWidth(80);
         JButton botaoAdicionar = getJButton(principal,modeloConsultas);
-
+        DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        TableColumnModel columnModel = tabela.getColumnModel();
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Consultas");
         titulo.setVisible(true);
         BotaoFechar botaoFechar = new BotaoFechar(this);
@@ -134,7 +138,6 @@ public class MenuConsultas extends JFrame{
                             if(acharPaciente(cpf,principal.getSistema().getPacientes())==null)
                             {
                                 PacienteEspecial pacienteEspecial = acharPacienteEspecial(cpf,principal.getSistema().getPacientesEspeciais());
-                                assert pacienteEspecial != null;
                                 Consulta consulta = new Consulta(pacienteEspecial,acharMedico(crm, principal.getSistema().getMedicos()),"Agendada", sala, dataHora, motivo);
                                 principal.getSistema().addConsulta(consulta);
                             }

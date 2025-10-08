@@ -5,6 +5,8 @@ import hospitalmanager.interfaces.ModelosTabela.TabelaMedicos;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
@@ -40,9 +42,9 @@ public class MenuMedicos extends JFrame {
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
-        javax.swing.table.DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        javax.swing.table.TableColumnModel columnModel = tabela.getColumnModel();
+        TableColumnModel columnModel = tabela.getColumnModel();
 
         columnModel.getColumn(0).setCellRenderer(centerRenderer);
         columnModel.getColumn(1).setCellRenderer(centerRenderer);

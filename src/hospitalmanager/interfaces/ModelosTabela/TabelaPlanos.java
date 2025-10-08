@@ -34,7 +34,7 @@ public class TabelaPlanos extends AbstractTableModel {
         PlanoDeSaude plano = planos.get(rowIndex);
         return switch (columnIndex){
             case 0 -> plano.getCodigo();
-            case 1 -> "    "+plano.getNome();
+            case 1 -> plano.getNome();
             case 2 -> plano.getDesConsultas();
             case 3 -> plano.getDesInternacoes();
             default -> null;

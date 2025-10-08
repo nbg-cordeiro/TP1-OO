@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TabelaMedicos extends AbstractTableModel {
     private final List<Medico> medicos;
-    private final String[] colunas = {"CRM", "CPF","Nome", "Idade","Especialidade","Agenda"};
+    private final String[] colunas = {"CRM", "CPF","Nome", "Idade","Especialidade","Opções"};
 
     public TabelaMedicos(List<Medico> medicos) {
         this.medicos = medicos;
@@ -34,7 +34,7 @@ public class TabelaMedicos extends AbstractTableModel {
         return switch (columnIndex){
             case 0 -> medico.getCrm();
             case 1 -> medico.getCpf();
-            case 2 -> "    "+medico.getNome();
+            case 2 -> medico.getNome();
             case 3 -> medico.getIdade();
             case 4 -> medico.getEspecialidade();
             case 5 -> "Ver";

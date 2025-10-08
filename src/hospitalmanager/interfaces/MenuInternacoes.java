@@ -5,6 +5,8 @@ import hospitalmanager.interfaces.ModelosTabela.TabelaInternacoes;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -28,6 +30,7 @@ public class MenuInternacoes extends JFrame{
         scrollPane.getViewport().setBackground(Color.GRAY);
         this.add(scrollPane,BorderLayout.CENTER);
 
+
         tabela.getColumnModel().getColumn(0).setMaxWidth(60);
         tabela.getColumnModel().getColumn(0).setMinWidth(60);
         tabela.getColumnModel().getColumn(1).setMaxWidth(100);
@@ -39,6 +42,14 @@ public class MenuInternacoes extends JFrame{
         tabela.getColumnModel().getColumn(6).setMaxWidth(50);
         tabela.getColumnModel().getColumn(6).setMinWidth(50);
         JButton botaoAdicionar = getJButton(principal,modeloInternacoes);
+        DefaultTableCellRenderer centerRenderer = new javax.swing.table.DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        TableColumnModel columnModel = tabela.getColumnModel();
+
+        for(int i = 0; i < tabela.getColumnModel().getColumnCount(); i++){
+            columnModel.getColumn(i).setCellRenderer(centerRenderer);
+        }
+
 
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Internações");
         titulo.setVisible(true);

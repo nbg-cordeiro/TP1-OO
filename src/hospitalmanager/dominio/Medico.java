@@ -21,9 +21,6 @@ public class Medico extends Pessoa{
     }
     public void setCrm(String crm)
         {this.crm = crm;}
-    public void adicionarConsulta(Consulta consulta)
-        {this.agenda.add(consulta);}
-
     public Double getCustoConsulta(){
         return custoConsulta;
     }
