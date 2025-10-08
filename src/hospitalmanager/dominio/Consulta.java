@@ -5,7 +5,8 @@ import java.util.Objects;
 
 public class Consulta{
 
-    private Paciente paciente;
+    private Paciente paciente= new Paciente(null,null,null);
+    private PacienteEspecial pacienteEspecial = new PacienteEspecial(null,null,null,null);
     private final Medico medico;
     private String status;
     private final LocalDateTime dataHora;
@@ -31,12 +32,13 @@ public class Consulta{
     }
     public Consulta(PacienteEspecial paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
     {
+        this.pacienteEspecial = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
         this.sala = sala;
         this.motivo = motivo;
         this.status = status;
-        descPlano = (paciente.getPlanoDeSaude().getDesConsultas())/100d;
+        descPlano = 1-(paciente.getPlanoDeSaude().getDesConsultas())/100d;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
         if(!Objects.equals(medico.getEspecialidade(), "Nenhum"))
@@ -44,14 +46,24 @@ public class Consulta{
             incrementoEspecialidade = 1.2;
         }
     }
+    public String getCpf()
+    {
+        if(pacienteEspecial.getCpf()==null)
+        {
+            return paciente.getCpf();
+        }
+        return pacienteEspecial.getCpf();
+    }
     public void setSala(String sala)
         {this.sala = sala;}
     public void setStatus(String status)
         {this.status = status;}
         public double getPreco(){
-            if(paciente.getIdade()>=60){
-                descIdade = 0.9d;
-            }
+                if(pacienteEspecial.getIdade()>=60 || paciente.getIdade()>=60)
+                {
+                    descIdade = 0.9d;
+                }
+
             return ((200*incrementoEspecialidade)*descIdade)*descPlano;
         }
     public String getMotivo()

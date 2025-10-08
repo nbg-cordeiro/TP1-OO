@@ -28,8 +28,7 @@ public class Pessoa{
     public int getIdade() {
             if(dataNascimento==null)
             {
-                return 0;
-
+                return -1;
             }
                 Period periodo = Period.between(dataNascimento, LocalDate.now());
                 return periodo.getYears();

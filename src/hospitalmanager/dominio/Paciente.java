@@ -18,10 +18,6 @@ public class Paciente extends Pessoa{
     {
         this.historicoConsultas.add(consulta);
     }
-    public void removerConsulta(Consulta consulta)
-    {
-        this.historicoConsultas.remove(consulta);
-    }
 
     public List<Consulta> getConsultas()
         {return historicoConsultas;}

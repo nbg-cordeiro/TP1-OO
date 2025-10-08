@@ -21,8 +21,6 @@ public class Medico extends Pessoa{
         {this.crm = crm;}
     public void adicionarConsulta(Consulta consulta)
         {this.agenda.add(consulta);}
-    public void removerConsulta(Consulta consulta)
-        {this.agenda.remove(consulta);}
 
     public List<Consulta> getConsultas()
         {return agenda;}

@@ -106,14 +106,12 @@ public class MenuPacientes extends JFrame {
                 JOptionPane.showMessageDialog(null,"Um erro ocorreu: "+e.getMessage());
                 throw new RuntimeException(e);
             }
-            String[] planosArray = new String[principal.getSistema().getPlanos().size() + 1];
-            planosArray[0] = "Nenhum";
-            int index = 1;
-            for (PlanoDeSaude plano : principal.getSistema().getPlanos()){
-                planosArray[index++] = plano.getCodigo() + " ("+plano.getNome()+")";
-            }
+            JComboBox<String> comboBoxPlanos = new JComboBox<>();
+            comboBoxPlanos.addItem("Nenhum");
 
-            JComboBox<String> comboBoxPlanos = new JComboBox<>(planosArray);
+            for (PlanoDeSaude plano : principal.getSistema().getPlanos()){
+                comboBoxPlanos.addItem(plano.getCodigo());
+            }
 
             JFormattedTextField campoCpf = new JFormattedTextField(formatoCpf);
             JTextField campoNome = new JTextField();
@@ -147,22 +145,23 @@ public class MenuPacientes extends JFrame {
                         if(dataNascimento.isAfter(LocalDate.now())){
                             throw new Exception("Data de nascimento invalida!");
                         }
-                        if(comboBoxPlanos.getSelectedIndex()==0){
+                        if(comboBoxPlanos.getSelectedItem()=="Nenhum"){
                             Paciente paciente = new Paciente(cpf, nome, dataNascimento);
                             idade = paciente.getIdade();
                             principal.getSistema().addPaciente(paciente);
                         }
                         else{
-                            PlanoDeSaude plano = principal.getSistema().getPlanos().get(comboBoxPlanos.getSelectedIndex());
+                            PlanoDeSaude plano = principal.getSistema().getPlanos().get(comboBoxPlanos.getSelectedIndex()-1);
                             PacienteEspecial pacienteEspecial = new PacienteEspecial(cpf, nome, dataNascimento,plano);
                             principal.getSistema().addPacienteEspecial(pacienteEspecial);
                             idade = pacienteEspecial.getIdade();
                         }
                         JOptionPane.showMessageDialog(null,
-                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\nIdade:"+ idade +"\nIdade"+"\nCódigo Plano de Saúde:"+planosArray[comboBoxPlanos.getSelectedIndex()], "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
+                                "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\nIdade:"+ idade +"\nIdade"+"\nCódigo Plano de Saúde:"+comboBoxPlanos.getSelectedItem(), "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
                         modeloPacientes.fireTableDataChanged();
                         modeloEspecial.fireTableDataChanged();
                     }catch(Exception e){
+                        System.out.println("Erro ao cadastrar Paciente:"+e.getMessage());
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: \n"+e.getMessage());
                         JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
                     }

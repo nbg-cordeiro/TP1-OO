@@ -63,6 +63,9 @@ public class MenuConsultas extends JFrame{
 
 
         JComboBox<String> campoCpf = new JComboBox<>();
+        for(PacienteEspecial paciente: principal.getSistema().getPacientesEspeciais()){
+            campoCpf.addItem(paciente.getCpf());
+        }
         for(Paciente paciente: principal.getSistema().getPacientes()){
             campoCpf.addItem(paciente.getCpf());
         }
