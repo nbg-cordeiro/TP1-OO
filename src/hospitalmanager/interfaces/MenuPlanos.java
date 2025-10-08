@@ -18,14 +18,14 @@ public class MenuPlanos extends JFrame {
         getContentPane().setBackground(Color.GRAY);
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
-        JButton botaoAdicionar = getJButton(principal);
+        TabelaPlanos modeloPlanos = new TabelaPlanos(principal.getSistema().getPlanos());
+        JTable tabela = new JTable(modeloPlanos);
+        JButton botaoAdicionar = getJButton(principal, modeloPlanos);
         setBackground(Color.GRAY);
         PainelInferior painelInferior = new PainelInferior(this,botaoFechar,botaoVoltar,botaoAdicionar);
         painelInferior.setBackground(Color.DARK_GRAY);
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Planos");
         titulo.setVisible(true);
-        TabelaPlanos modeloPlanos = new TabelaPlanos(principal.getSistema().getPlanos());
-        JTable tabela = new JTable(modeloPlanos);
         tabela.setBackground(Color.lightGray);
         JScrollPane scrollPane = new JScrollPane(tabela);
         scrollPane.setBackground(Color.gray);
@@ -42,7 +42,7 @@ public class MenuPlanos extends JFrame {
         dim.height = (alturaDeUmaLinha * 3) + 4;
         tabela.getTableHeader().setMinimumSize(dim);
     }
-    private static JButton getJButton(MenuInicial principal) {
+    private static JButton getJButton(MenuInicial principal, TabelaPlanos modelo) {
         JButton botaoAdicionar = new JButton("Adicionar");
         botaoAdicionar.setBackground(Color.LIGHT_GRAY);
 
@@ -76,6 +76,9 @@ public class MenuPlanos extends JFrame {
                 Double descCons = Double.parseDouble(campoDescCons.getText());
                 PlanoDeSaude plano = new PlanoDeSaude(codigo,nome,descInter,descCons);
                 principal.getSistema().addPlano(plano);
+                JOptionPane.showMessageDialog(null,
+                        "Plano de Saúde Cadastrado com Sucesso!\n\n" + "Código: " + codigo + "\nNome: " + nome + "\nDesconto em Consultas (%): "+ descCons +"\nDesconto em Internações (%):"+descInter, "Dados do Plano de Saúde", JOptionPane.INFORMATION_MESSAGE);
+                modelo.fireTableDataChanged();
             } else {
                 JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
             }

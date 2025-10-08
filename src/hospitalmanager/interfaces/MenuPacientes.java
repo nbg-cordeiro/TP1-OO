@@ -1,15 +1,11 @@
 package hospitalmanager.interfaces;
 
-import hospitalmanager.dominio.Paciente;
-import hospitalmanager.dominio.PacienteEspecial;
-import hospitalmanager.dominio.PlanoDeSaude;
-import hospitalmanager.interfaces.ModelosTabela.TabelaPacientes;
-import hospitalmanager.interfaces.ModelosTabela.TabelaPacientesEspeciais;
+import hospitalmanager.dominio.*;
+import hospitalmanager.interfaces.ModelosTabela.*;
 import hospitalmanager.interfaces.elementos.*;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
@@ -23,18 +19,18 @@ public class MenuPacientes extends JFrame {
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
         getContentPane().setBackground(Color.gray);
-
-        JButton botaoAdicionar = getJButton(principal);
+        TabelaPacientes modeloPaciente = new TabelaPacientes(principal.getSistema().getPacientes());
+        TabelaPacientesEspeciais modeloEspecial = new TabelaPacientesEspeciais(principal.getSistema().getPacientesEspeciais());
+        JTable tabela = new JTable(modeloPaciente);
+        JTable tabelaEspecial = new JTable(modeloEspecial);
+        JButton botaoAdicionar = getJButton(principal, modeloEspecial,modeloPaciente);
         BotaoFechar botaoFechar = new BotaoFechar(this);
         BotaoVoltar botaoVoltar = new BotaoVoltar(this,principal);
 
         PainelTitulo titulo = new PainelTitulo(this,"Hospital Manager - Menu Pacientes");
         titulo.setVisible(true);
 
-        TabelaPacientes modeloPaciente = new TabelaPacientes(principal.getSistema().getPacientes());
-        TabelaPacientesEspeciais modeloEspecial = new TabelaPacientesEspeciais(principal.getSistema().getPacientesEspeciais());
-        JTable tabela = new JTable(modeloPaciente);
-        JTable tabelaEspecial = new JTable(modeloEspecial);
+
 
         tabela.setBackground(Color.lightGray);
         tabelaEspecial.setBackground(Color.lightGray);
@@ -86,7 +82,7 @@ public class MenuPacientes extends JFrame {
         painelInferior.setBackground(Color.DARK_GRAY);
     }
 
-    private static JButton getJButton(MenuInicial principal) {
+    private static JButton getJButton(MenuInicial principal, TabelaPacientesEspeciais modeloEspecial, TabelaPacientes modeloPacientes) {
         JButton botaoAdicionar = new JButton("Adicionar");
         botaoAdicionar.setBackground(Color.LIGHT_GRAY);
         botaoAdicionar.setPreferredSize(new Dimension(120, 40));
@@ -164,10 +160,11 @@ public class MenuPacientes extends JFrame {
                         }
                         JOptionPane.showMessageDialog(null,
                                 "Paciente Cadastrado com Sucesso!\n\n" + "CPF: " + cpf + "\n" + "Nome: " + nome + "\nIdade:"+ idade +"\nIdade"+"\nCódigo Plano de Saúde:"+planosArray[comboBoxPlanos.getSelectedIndex()], "Dados do Paciente", JOptionPane.INFORMATION_MESSAGE);
+                        modeloPacientes.fireTableDataChanged();
+                        modeloEspecial.fireTableDataChanged();
                     }catch(Exception e){
                         JOptionPane.showMessageDialog(null,"Um erro ocorreu: \n"+e.getMessage());
                         JOptionPane.showMessageDialog(null, "Cadastro cancelado.");
-
                     }
                 }
             } else {

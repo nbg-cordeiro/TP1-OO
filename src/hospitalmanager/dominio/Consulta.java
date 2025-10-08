@@ -1,66 +1,59 @@
 package hospitalmanager.dominio;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Consulta{
 
     private Paciente paciente;
-    private PacienteEspecial pacienteEspecial;
-    private Medico medico;
-    private String status = "Marcada";
-    private LocalDateTime dataHora;
-    private String local;
-    private String motivo;
+    private final Medico medico;
+    private String status;
+    private final LocalDateTime dataHora;
+    private String sala;
+    private final String motivo;
     private double descPlano = 1d;
     private double descIdade = 1d;
-    public Consulta(Paciente paciente, Medico medico,String status,String local, LocalDateTime dataHora, String motivo)
+    private double incrementoEspecialidade = 1d;
+    public Consulta(Paciente paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
     {
         this.paciente = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
-        this.local = local;
+        this.sala = sala;
         this.motivo = motivo;
         this.status = status;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
+        if(!Objects.equals(medico.getEspecialidade(), "Nenhum"))
+        {
+            incrementoEspecialidade = 1.2;
+        }
     }
-    public Consulta(PacienteEspecial paciente, Medico medico,String status,String local, LocalDateTime dataHora, String motivo)
+    public Consulta(PacienteEspecial paciente, Medico medico,String status,String sala, LocalDateTime dataHora, String motivo)
     {
-        this.pacienteEspecial = paciente;
         this.medico = medico;
         this.dataHora = dataHora;
-        this.local = local;
+        this.sala = sala;
         this.motivo = motivo;
         this.status = status;
         descPlano = (paciente.getPlanoDeSaude().getDesConsultas())/100d;
         paciente.adicionarConsulta(this);
         medico.adicionarConsulta(this);
-    }
-    public void setMotivo(String motivo)
-        {this.motivo = motivo;}
-    public void setDataHora(LocalDateTime dataHora)
-        {this.dataHora = dataHora;}
-    public void setLocal(String local)
-        {this.local = local;}
-    public void setPaciente(Paciente paciente)
-        {this.paciente = paciente;}
-    public void setMedico(Medico medico)
-        {this.medico = medico;}
-    public void concluirConsulta()
-        {status = "Concluída";}
-    public void cancelarConsulta()
+        if(!Objects.equals(medico.getEspecialidade(), "Nenhum"))
         {
-            medico.removerConsulta(this);
-            paciente.removerConsulta(this);
-            this.status = "Cancelada";
+            incrementoEspecialidade = 1.2;
         }
+    }
+    public void setSala(String sala)
+        {this.sala = sala;}
+    public void setStatus(String status)
+        {this.status = status;}
         public double getPreco(){
             if(paciente.getIdade()>=60){
                 descIdade = 0.9d;
             }
-            return (200*descIdade)*descPlano;
+            return ((200*incrementoEspecialidade)*descIdade)*descPlano;
         }
-
     public String getMotivo()
         {return motivo;}
     public Paciente getPaciente()
@@ -68,13 +61,19 @@ public class Consulta{
     public Medico getMedico()
         {return medico;}
     public String getStatus()
-        {return status;}
-    public String getLocal()
-        {return local;}
+        {
+            if(!Objects.equals(status, "Cancelada") && LocalDateTime.now().isAfter(dataHora))
+            {
+                status = "Concluída";
+            }
+            return status;}
+    public String getSala()
+        {return sala;}
     public LocalDateTime getDataHora()
         {return dataHora;}
     @Override
     public String toString() {
-        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getStatus(),getDataHora().toString(),getLocal(),getMotivo());
+        return String.join(",",getPaciente().getCpf(),getMedico().getCrm(),getStatus(),getDataHora().toString(),getSala(),getMotivo());
     }
+
 }

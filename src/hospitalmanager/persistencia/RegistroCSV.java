@@ -292,8 +292,9 @@ public class RegistroCSV {
         int escolha = JOptionPane.showConfirmDialog(null, "Você está prestes a deletar TODOS os registros de Planos de Saúde.\n Deseja Continuar?", "Aviso",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (escolha == JOptionPane.OK_OPTION) {
-            deleteIfExists(Path.of("src/hospitalmanager/dados/Planos.csv"));
+            deleteIfExists(Path.of("src/hospitalmanager/dados/PlanosDeSaude.csv"));
             sistema.getPlanos().clear();
+            System.err.println("Planos de Saúde Deletados!");
         } else {
             JOptionPane.showMessageDialog(null, "Operação cancelada.\n Nenhum registro foi deletado!");
         }
@@ -377,7 +378,15 @@ public class RegistroCSV {
                 return p;
             }
         }
-        return new Paciente(null, null, null);
+        return null;
+    }
+    public static PacienteEspecial acharPacienteEspecial(String cpf, List<PacienteEspecial> pacientesEspeciais) {
+        for(PacienteEspecial p : pacientesEspeciais) {
+            if(p.getCpf().equals(cpf)) {
+                return p;
+            }
+        }
+        return null;
     }
     public static PlanoDeSaude acharPlano(String codigo, List<PlanoDeSaude> planos) {
         for (PlanoDeSaude p : planos) {
@@ -387,7 +396,7 @@ public class RegistroCSV {
         }
         return new PlanoDeSaude(null, null, null,null);
     }
-    public static Medico acharMedico(String crm, List<Medico> medicos) {
+    public static Medico acharMedico(String crm, List<Medico> medicos){
         for (Medico m : medicos) {
             if (m.getCrm().equals(crm)) {
                 return m;

@@ -25,9 +25,10 @@ public class MenuGeral extends JFrame {
         botaoCasosDeTeste.setBackground(Color.lightGray);
         JButton botaoDelPacientes = new JButton("Deletar Pacientes");
         botaoDelPacientes.setBackground(Color.pink);
-        botaoDelPacientes.setForeground(Color.RED);JButton botaoDelPacientesEspeciais = new JButton("Deletar Especiais");
-        botaoDelPacientes.setBackground(Color.pink);
         botaoDelPacientes.setForeground(Color.RED);
+        JButton botaoDelPacientesEspeciais = new JButton("Deletar Pacientes Especiais");
+        botaoDelPacientesEspeciais.setBackground(Color.pink);
+        botaoDelPacientesEspeciais.setForeground(Color.RED);
         JButton botaoDelConsultas = new JButton("Deletar Consultas");
         botaoDelConsultas.setBackground(Color.pink);
         botaoDelConsultas.setForeground(Color.RED);
@@ -40,7 +41,7 @@ public class MenuGeral extends JFrame {
         JButton botaoDelPlanos = new JButton("Deletar Planos de Saúde");
         botaoDelPlanos.setBackground(Color.pink);
         botaoDelPlanos.setForeground(Color.RED);
-        JButton botaoDelEspecialidades = new JButton("Deletar Planos de Saúde");
+        JButton botaoDelEspecialidades = new JButton("Especialidades");
         botaoDelEspecialidades.setBackground(Color.pink);
         botaoDelEspecialidades.setForeground(Color.RED);
 
