@@ -27,18 +27,24 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
    java -cp out\production\hospital-manager hospitalmanager.app.App
    Esse comando também deve ser colado no mesmo lugar, mas só após a compilação
 
-3. **Estrutura de Pastas:**  
-   -hospitalmanager (pasta principal do projeto)
-      --app (pasta da aplicação, contém a main executável)
-      --dominio (principais entidades da aplicação)
-      --interfaces (interfaces gráficas)
-         ---elementos (elementos gráficos comuns a muitos menus)
-         ---modelosTabela (modelos de tabela customizados para cada menu)
-      --persistencia (entidades responsáveis pela persistencia de dados)
-      --dados (onde os dados são armazenados e lidos)
-         ---relatorios(onde as exportações de relatórios são salvar)
-            ---- consultas
-            ---- Internações
+### Estrutura de Pastas
+
+    hospitalmanager/                 # pasta principal do projeto
+    │
+    ├── app/                         # pasta da aplicação, contém a main executável
+    │
+    ├── dominio/                     # principais entidades da aplicação
+    │
+    ├── interfaces/                  # interfaces gráficas
+    │   ├── elementos/               # elementos gráficos comuns a muitos menus
+    │   └── modelosTabela/           # modelos de tabela customizados para cada menu
+    │
+    ├── persistencia/                # entidades responsáveis pela persistência de dados
+    │
+    └── dados/                       # onde os dados são armazenados e lidos
+        └── relatorios/              # onde as exportações de relatórios são salvas
+            ├── consultas/
+            └── internacoes/
 
 3. **Versão do JAVA utilizada:**  
    `jdk Java 24 `
