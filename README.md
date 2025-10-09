@@ -36,6 +36,9 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
          ---modelosTabela (modelos de tabela customizados para cada menu)
       --persistencia (entidades responsáveis pela persistencia de dados)
       --dados (onde os dados são armazenados e lidos)
+         ---relatorios(onde as exportações de relatórios são salvar)
+            ---- consultas
+            ---- Internações
 
 3. **Versão do JAVA utilizada:**  
    `jdk Java 24 `
@@ -49,41 +52,7 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 ## Prints da Execução
 
-1. Menu Inicial:  
-   ![Print Menu Inicial](https://prnt.sc/W56mpDrG_lrJ)
-
-2. Menu Médico:  
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-   ![Menu Médico]()
-
-3. Menu Paciente:
-   ![Menu Paciente](https://prnt.sc/2TOw78h635j4)
-   ![Cadastro Paciente](https://prnt.sc/I0RKm5xo7ths)
-   ![Menu PacienteEspecial (Apertando o botão alternar)](https://prnt.sc/NfkbNv-yyIyF)
-   ![Opções de Relatório "Ver"](https://prnt.sc/U7zZG0ACp35F)
-   ![Relatório Internações](https://prnt.sc/nAKom-vEAKXm)
-   ![Relatório Consultas](https://prnt.sc/w1SoKehtfvOT)
-
-4. Menu Geral
-   ![Menu Geral](https://prnt.sc/BwmfKaX0pybp)
-
-5. Menu Consulta
-   ![Menu Consulta](https://prnt.sc/5k9o67XDSPiL)
-   ![Cadastro Consulta](https://prnt.sc/Vf4pVJbL72za)
-
-6. Menu Internações
-   ![Menu Internações](https://prnt.sc/Ao6U0uLiyRlp)
-   ![Cadastro Internação](https://prnt.sc/ZBIqcwfiGB08)
-
-7. Cadastro Plano de Saúde
-   ![Menu Plano de Saúde](https://prnt.sc/I0_wS9VFxsJE)
-   ![Cadastro Plano de Saúde](https://prnt.sc/WwOqiMLHjgOE)
+1. [Todos os prints da execução](https://imgur.com/a/7n2cHD1)
 
 ---
 
