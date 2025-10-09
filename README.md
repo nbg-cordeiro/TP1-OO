@@ -31,6 +31,8 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
     hospitalmanager/                 # pasta principal do projeto
     │
+    ├── imagens/                     # pasta com as imagens de execução
+    │
     ├── app/                         # pasta da aplicação, contém a main executável
     │
     ├── dominio/                     # principais entidades da aplicação
@@ -54,12 +56,32 @@ Desenvolvimento de um sistema de gerenciamento hospitalar utilizando os conceito
 
 - [Vídeo](https://youtu.be/aMjeJDWlBW4)
 
----
-
 ## Prints da Execução
 
-1. [Todos os prints da execução](https://imgur.com/a/7n2cHD1)
-
+1. [Menu Inicial](imagens/MenuInicial.png)
+2. [Menu Pacientes](imagens/Pacientes.png)
+3. [Pacientes Especiais (ao clicar em Alternar)](imagens/Pacientes%20Especiais%20(ao%20clicar%20em%20Alternar).png)
+4. [Cadastro Paciente](imagens/Cadastro%20Paciente.png)
+5. [Menu de opções (botão ver da tabela)](imagens/Menu%20de%20opções%20(botão%20ver%20da%20tabela).png)
+6. [Botão Consultas do Paciente](imagens/Botão%20Consultas%20do%20Paciente.png)
+7. [Botão internações do Paciente](imagens/Botão%20internações%20do%20Paciente%20(outro%20paciente).png)
+8. [Menu Médicos](imagens/Menu%20Médicos.png)
+9. [Menu Opções de Adicionar](imagens/Menu%20Adicionar%20Medicos.png)
+10. [Menu Adicionar Médico](imagens/Menu%20Adicionar%20Médico.png)
+11. [Menu AdicionarEspecialidade](imagens/Menu%20adicionar%20Especialidade.png)
+12. [Menu da Agenda (botão ver na tabela)](imagens/Menu%20da%20Agenda%20(botão%20ver%20na%20tabela).png)
+13. [Menu Consultas](imagens/Menu%20Consultas.png)
+14. [Adicionar Consulta](imagens/Adicionar%20Consulta.png)
+15. [Botão Ver da tabela](imagens/Botão%20Ver%20da%20tabela.png)
+16. [Menu Mostrar relatório](imagens/Menu%20Mostrar%20Relatório.png)
+17. [Menu concluir consulta](imagens/Menu%20concluir%20consulta.png)
+18. [Menu Internações](imagens/Menu%20Internações.png)
+19. [Adicionar Internação](imagens/Adicionar%20Internação.png)
+20. [Botão Ver da Tabela](imagens/Botão%20Ver%20da%20TabelaOutra.png)
+21. [Botão mostrar relatório](imagens/Botão%20mostrar%20relatório.png)
+22. [Menu Plano de Saúde](imagens/Menu%20Plano%20de%20Saúde.png)
+23. [Adicionar Plano](imagens/Adicionar%20Plano.png)
+24. [Menu Geral (Testes)](imagens/Menu%20Geral%20(de%20testes).png)
 ---
 
 ---
